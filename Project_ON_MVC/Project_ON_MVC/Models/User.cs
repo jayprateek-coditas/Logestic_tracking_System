@@ -25,12 +25,12 @@ namespace Project_ON_MVC.Models
         public string Email { get; set; }
         public string Password { get; set; }
         public Nullable<int> Role_ID { get; set; }
+        public string user_status { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Company> Companies { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Order_Details> Order_Details { get; set; }
         public virtual Role Role { get; set; }
-        public string Name { get; set; }
     }
 }

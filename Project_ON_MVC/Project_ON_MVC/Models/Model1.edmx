@@ -4,14 +4,13 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="MY_ProjectModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="MY_ProjectModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Company">
           <Key>
             <PropertyRef Name="Company_ID" />
           </Key>
           <Property Name="Company_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Company_Name" Type="varchar" MaxLength="35" Nullable="false" />
-          <Property Name="Email_ID" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="Address" Type="text" Nullable="false" />
           <Property Name="Contact_Number" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="User_ids" Type="int" />
@@ -88,6 +87,7 @@
           <Property Name="Email" Type="nvarchar" MaxLength="25" />
           <Property Name="Password" Type="varchar" MaxLength="30" />
           <Property Name="Role_ID" Type="int" />
+          <Property Name="user_status" Type="varchar" MaxLength="2" />
         </EntityType>
         <Association Name="FK__Company__User_id__2D27B809">
           <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
@@ -211,8 +211,7 @@
             <End Role="Users" EntitySet="Users" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="MY_ProjectModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -222,7 +221,6 @@
           </Key>
           <Property Name="Company_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Company_Name" Type="String" MaxLength="35" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Email_ID" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Contact_Number" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="User_ids" Type="Int32" />
@@ -313,6 +311,7 @@
           <NavigationProperty Name="Companies" Relationship="Self.FK__Company__User_id__2D27B809" FromRole="Users" ToRole="Company" />
           <NavigationProperty Name="Order_Details" Relationship="Self.FK__Order_Det__User___29572725" FromRole="Users" ToRole="Order_Details" />
           <NavigationProperty Name="Role" Relationship="Self.FK__Users__Role_ID__267ABA7A" FromRole="Users" ToRole="Roles" />
+          <Property Name="user_status" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK__Company__User_id__2D27B809">
           <End Role="Users" Type="Self.User" Multiplicity="0..1" />
@@ -447,7 +446,6 @@
               <MappingFragment StoreEntitySet="Company">
                 <ScalarProperty Name="Company_ID" ColumnName="Company_ID" />
                 <ScalarProperty Name="Company_Name" ColumnName="Company_Name" />
-                <ScalarProperty Name="Email_ID" ColumnName="Email_ID" />
                 <ScalarProperty Name="Address" ColumnName="Address" />
                 <ScalarProperty Name="Contact_Number" ColumnName="Contact_Number" />
                 <ScalarProperty Name="User_ids" ColumnName="User_ids" />
@@ -527,6 +525,7 @@
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="MY_ProjectModel.User">
               <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="user_status" ColumnName="user_status" />
                 <ScalarProperty Name="Users_ID" ColumnName="Users_ID" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Password" ColumnName="Password" />

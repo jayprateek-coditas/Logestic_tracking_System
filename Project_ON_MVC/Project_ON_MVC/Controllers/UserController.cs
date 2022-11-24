@@ -26,23 +26,28 @@ namespace Logestic_Tracking.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Login(UserController user)
+        public ActionResult Login(User user)
         {
-            return View();
+            User u = context.Users.Where(a => a.Email == user.Email && a.Password ==user.Password).SingleOrDefault();
+            FormsAuthentication.SetAuthCookie(user.Email,false);
+
+            if (u == null)
+            {
+                ViewData["msg"] = "Invalid id OR Password !!";
+                return View();
+            }
+            else if(u.user_status!="1")
+            {
+                ViewData["msg"] = "You Are not Verified till Now !!";
+                return View();
+            }
+            
+             return RedirectToAction("About", "Home");
+            
         }
 
         public ActionResult SignUp()
         {
-            var role = context.Roles.ToList();
-
-
-            List<SelectListItem> my_rol = new List<SelectListItem>();//creating list of select list items
-           
-            foreach (var ro in role)
-            {
-                my_rol.Add(new SelectListItem() { Value = (ro.Role_ID).ToString(), Text = ro.Role_Name });//populating select list with items
-            }
-            ViewData.Add("Roles_1", my_rol.AsEnumerable());//adding list to view data
             return View();
 
             
@@ -51,6 +56,8 @@ namespace Logestic_Tracking.Controllers
         [HttpPost]
         public ActionResult SignUp(User user)
         {
+            user.Role_ID = 12;
+            user.user_status = "1";
             if(ModelState.IsValid)
             {
                 
@@ -61,5 +68,7 @@ namespace Logestic_Tracking.Controllers
             return View(user);
 
         }
+
+       
     }
 }

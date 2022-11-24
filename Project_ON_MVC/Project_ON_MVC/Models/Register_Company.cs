@@ -7,8 +7,7 @@ namespace Project_ON_MVC.Models
 {
     public class Register_Company
     {
-      public User user { get; set; }
+        public User user { get; set; }
         public Company company { get; set; }
-        //public IEnumerable<Shipment> shipments = null;
     }
 }

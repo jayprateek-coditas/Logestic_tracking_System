@@ -16,6 +16,12 @@
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
+        <div class="alert-danger">
+            @if (ViewData["msg"]!=null)
+                {
+                    @ViewData["msg"]
+                }
+        </div>
         <div class="form-group">
             @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">

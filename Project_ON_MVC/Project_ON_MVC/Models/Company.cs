@@ -20,10 +20,9 @@ namespace Project_ON_MVC.Models
             this.Shipments = new HashSet<Shipment>();
             this.Trackings = new HashSet<Tracking>();
         }
-    
+      
         public int Company_ID { get; set; }
         public string Company_Name { get; set; }
-        public string Email_ID { get; set; }
         public string Address { get; set; }
         public string Contact_Number { get; set; }
         public Nullable<int> User_ids { get; set; }

@@ -6,7 +6,6 @@
         <MappingFragment StoreEntitySet="Company">
           <ScalarProperty Name="Company_ID" ColumnName="Company_ID" />
           <ScalarProperty Name="Company_Name" ColumnName="Company_Name" />
-          <ScalarProperty Name="Email_ID" ColumnName="Email_ID" />
           <ScalarProperty Name="Address" ColumnName="Address" />
           <ScalarProperty Name="Contact_Number" ColumnName="Contact_Number" />
           <ScalarProperty Name="User_ids" ColumnName="User_ids" />
@@ -86,6 +85,7 @@
     <EntitySetMapping Name="Users">
       <EntityTypeMapping TypeName="MY_ProjectModel.User">
         <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="user_status" ColumnName="user_status" />
           <ScalarProperty Name="Users_ID" ColumnName="Users_ID" />
           <ScalarProperty Name="Email" ColumnName="Email" />
           <ScalarProperty Name="Password" ColumnName="Password" />

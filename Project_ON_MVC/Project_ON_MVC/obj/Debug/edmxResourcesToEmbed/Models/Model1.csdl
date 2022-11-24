@@ -6,7 +6,6 @@
     </Key>
     <Property Name="Company_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Company_Name" Type="String" MaxLength="35" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="Email_ID" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="Contact_Number" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="User_ids" Type="Int32" />
@@ -97,6 +96,7 @@
     <NavigationProperty Name="Companies" Relationship="Self.FK__Company__User_id__2D27B809" FromRole="Users" ToRole="Company" />
     <NavigationProperty Name="Order_Details" Relationship="Self.FK__Order_Det__User___29572725" FromRole="Users" ToRole="Order_Details" />
     <NavigationProperty Name="Role" Relationship="Self.FK__Users__Role_ID__267ABA7A" FromRole="Users" ToRole="Roles" />
+    <Property Name="user_status" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
   </EntityType>
   <Association Name="FK__Company__User_id__2D27B809">
     <End Role="Users" Type="Self.User" Multiplicity="0..1" />
