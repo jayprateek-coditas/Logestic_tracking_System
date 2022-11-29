@@ -13,10 +13,10 @@ namespace Project_ON_MVC.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class MY_ProjectEntities : DbContext
+    public partial class MY_ProjectEntities1 : DbContext
     {
-        public MY_ProjectEntities()
-            : base("name=MY_ProjectEntities")
+        public MY_ProjectEntities1()
+            : base("name=MY_ProjectEntities1")
         {
         }
     
@@ -31,7 +31,7 @@ namespace Project_ON_MVC.Models
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<Shipment> Shipments { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
-        public virtual DbSet<Tracking> Trackings { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Tracking> Trackings { get; set; }
     }
 }

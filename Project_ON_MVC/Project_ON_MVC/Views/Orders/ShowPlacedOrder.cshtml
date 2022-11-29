@@ -1,0 +1,52 @@
+﻿@model List<Project_ON_MVC.Models.Tracking>
+
+@{
+    ViewBag.Title = "ShowPlacedOrder";
+}
+
+<h2>ShowPlacedOrder</h2>
+
+<div>
+    <h4>Tracking</h4>
+    
+    
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>
+                        Tracking ID
+                    </th>
+                    <th>
+                        Order ID
+                    </th>
+                    <th>
+                        Company ID
+                    </th>
+                    <th>
+                        Order Status
+                    </th>
+                </tr>
+            </thead>
+    
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Tracking_Number)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Order_ID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Company_ID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Order_Status)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+

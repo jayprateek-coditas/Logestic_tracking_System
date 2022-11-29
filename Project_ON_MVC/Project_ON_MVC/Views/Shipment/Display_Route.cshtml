@@ -1,0 +1,65 @@
+﻿@model IEnumerable<Project_ON_MVC.Models.Shipment>
+
+@{
+    ViewBag.Title = "Display_Route";
+}
+
+<h2>Display_Route</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Route_ID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Source)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Destination)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Base_Price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Distance)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Company_ID)
+        </th>
+        
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Route_ID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Source)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Destination)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Base_Price)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Distance)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Company_ID)
+        </td>
+        <td>
+            @Html.ActionLink("DisplayCompany","Show_Company", new { id=item.Company_ID })
+        </td>
+        <td>
+            <button type="button" class="btn btn-success"> @Html.ActionLink("Select","Confirm", new { id =item.Route_ID})</button>
+        </td>
+    </tr>
+}
+
+</table>

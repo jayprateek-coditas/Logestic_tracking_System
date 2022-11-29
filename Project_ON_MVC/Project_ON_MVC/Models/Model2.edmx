@@ -20,16 +20,17 @@
             <PropertyRef Name="Order_ID" />
           </Key>
           <Property Name="Order_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Order_Valuation" Type="money" Nullable="false" />
-          <Property Name="Quantity" Type="int" Nullable="false" />
-          <Property Name="Weight" Type="float" />
-          <Property Name="Order_Source" Type="varchar" MaxLength="30" Nullable="false" />
-          <Property Name="Order_Destination" Type="varchar" MaxLength="30" Nullable="false" />
-          <Property Name="Source_Description" Type="text" Nullable="false" />
-          <Property Name="Dest_Description" Type="text" Nullable="false" />
-          <Property Name="Total_Price" Type="money" Nullable="false" />
-          <Property Name="Order_Time" Type="datetime" Nullable="false" />
+          <Property Name="Order_Valuation" Type="int" />
+          <Property Name="Quantity" Type="int" />
+          <Property Name="OrderWeight" Type="float" />
+          <Property Name="Order_Source" Type="varchar" MaxLength="30" />
+          <Property Name="Order_Destination" Type="varchar" MaxLength="30" />
+          <Property Name="Source_Description" Type="varchar" MaxLength="180" />
+          <Property Name="Dest_Description" Type="varchar" MaxLength="180" />
+          <Property Name="Total_Price" Type="float" />
+          <Property Name="Order_Time" Type="datetime" />
           <Property Name="User_ids" Type="int" />
+          <Property Name="Ship_ID" Type="int" />
         </EntityType>
         <EntityType Name="Payment">
           <Key>
@@ -75,7 +76,7 @@
             <PropertyRef Name="Tracking_Number" />
           </Key>
           <Property Name="Order_ID" Type="int" />
-          <Property Name="Tracking_Number" Type="decimal" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Tracking_Number" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Company_ID" Type="int" />
           <Property Name="Order_Status" Type="varchar" MaxLength="40" />
         </EntityType>
@@ -101,7 +102,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Order_Det__User___29572725">
+        <Association Name="FK__Order_Det__Ship___5070F446">
+          <End Role="Shipment" Type="Self.Shipment" Multiplicity="0..1" />
+          <End Role="Order_Details" Type="Self.Order_Details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Shipment">
+              <PropertyRef Name="Route_ID" />
+            </Principal>
+            <Dependent Role="Order_Details">
+              <PropertyRef Name="Ship_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Order_Det__User___49C3F6B7">
           <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
           <End Role="Order_Details" Type="Self.Order_Details" Multiplicity="*" />
           <ReferentialConstraint>
@@ -113,7 +126,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Payment__Order_I__37A5467C">
+        <Association Name="FK__Payment__Order_I__4CA06362">
           <End Role="Order_Details" Type="Self.Order_Details" Multiplicity="0..1" />
           <End Role="Payment" Type="Self.Payment" Multiplicity="*" />
           <ReferentialConstraint>
@@ -137,7 +150,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Tracking__Compan__34C8D9D1">
+        <Association Name="FK__Tracking__Compan__5441852A">
           <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
           <End Role="Tracking" Type="Self.Tracking" Multiplicity="*" />
           <ReferentialConstraint>
@@ -149,7 +162,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Tracking__Order___33D4B598">
+        <Association Name="FK__Tracking__Order___534D60F1">
           <End Role="Order_Details" Type="Self.Order_Details" Multiplicity="0..1" />
           <End Role="Tracking" Type="Self.Tracking" Multiplicity="*" />
           <ReferentialConstraint>
@@ -186,11 +199,15 @@
             <End Role="Users" EntitySet="Users" />
             <End Role="Company" EntitySet="Company" />
           </AssociationSet>
-          <AssociationSet Name="FK__Order_Det__User___29572725" Association="Self.FK__Order_Det__User___29572725">
+          <AssociationSet Name="FK__Order_Det__Ship___5070F446" Association="Self.FK__Order_Det__Ship___5070F446">
+            <End Role="Shipment" EntitySet="Shipment" />
+            <End Role="Order_Details" EntitySet="Order_Details" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Order_Det__User___49C3F6B7" Association="Self.FK__Order_Det__User___49C3F6B7">
             <End Role="Users" EntitySet="Users" />
             <End Role="Order_Details" EntitySet="Order_Details" />
           </AssociationSet>
-          <AssociationSet Name="FK__Payment__Order_I__37A5467C" Association="Self.FK__Payment__Order_I__37A5467C">
+          <AssociationSet Name="FK__Payment__Order_I__4CA06362" Association="Self.FK__Payment__Order_I__4CA06362">
             <End Role="Order_Details" EntitySet="Order_Details" />
             <End Role="Payment" EntitySet="Payment" />
           </AssociationSet>
@@ -198,11 +215,11 @@
             <End Role="Company" EntitySet="Company" />
             <End Role="Shipment" EntitySet="Shipment" />
           </AssociationSet>
-          <AssociationSet Name="FK__Tracking__Compan__34C8D9D1" Association="Self.FK__Tracking__Compan__34C8D9D1">
+          <AssociationSet Name="FK__Tracking__Compan__5441852A" Association="Self.FK__Tracking__Compan__5441852A">
             <End Role="Company" EntitySet="Company" />
             <End Role="Tracking" EntitySet="Tracking" />
           </AssociationSet>
-          <AssociationSet Name="FK__Tracking__Order___33D4B598" Association="Self.FK__Tracking__Order___33D4B598">
+          <AssociationSet Name="FK__Tracking__Order___534D60F1" Association="Self.FK__Tracking__Order___534D60F1">
             <End Role="Order_Details" EntitySet="Order_Details" />
             <End Role="Tracking" EntitySet="Tracking" />
           </AssociationSet>
@@ -226,26 +243,28 @@
           <Property Name="User_ids" Type="Int32" />
           <NavigationProperty Name="User" Relationship="Self.FK__Company__User_id__2D27B809" FromRole="Company" ToRole="Users" />
           <NavigationProperty Name="Shipments" Relationship="Self.FK__Shipment__Compan__300424B4" FromRole="Company" ToRole="Shipment" />
-          <NavigationProperty Name="Trackings" Relationship="Self.FK__Tracking__Compan__34C8D9D1" FromRole="Company" ToRole="Tracking" />
+          <NavigationProperty Name="Trackings" Relationship="Self.FK__Tracking__Compan__4F7CD00D" FromRole="Company" ToRole="Tracking" />
         </EntityType>
         <EntityType Name="Order_Details">
           <Key>
             <PropertyRef Name="Order_ID" />
           </Key>
           <Property Name="Order_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Order_Valuation" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
-          <Property Name="Quantity" Type="Int32" Nullable="false" />
-          <Property Name="Weight" Type="Double" />
-          <Property Name="Order_Source" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Order_Destination" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Source_Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Dest_Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Total_Price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
-          <Property Name="Order_Time" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Order_Valuation" Type="Int32" />
+          <Property Name="Quantity" Type="Int32" />
+          <Property Name="OrderWeight" Type="Double" />
+          <Property Name="Order_Source" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Order_Destination" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Source_Description" Type="String" MaxLength="180" FixedLength="false" Unicode="false" />
+          <Property Name="Dest_Description" Type="String" MaxLength="180" FixedLength="false" Unicode="false" />
+          <Property Name="Total_Price" Type="Double" />
+          <Property Name="Order_Time" Type="DateTime" Precision="3" />
           <Property Name="User_ids" Type="Int32" />
-          <NavigationProperty Name="User" Relationship="Self.FK__Order_Det__User___29572725" FromRole="Order_Details" ToRole="Users" />
-          <NavigationProperty Name="Payments" Relationship="Self.FK__Payment__Order_I__37A5467C" FromRole="Order_Details" ToRole="Payment" />
-          <NavigationProperty Name="Trackings" Relationship="Self.FK__Tracking__Order___33D4B598" FromRole="Order_Details" ToRole="Tracking" />
+          <NavigationProperty Name="User" Relationship="Self.FK__Order_Det__User___49C3F6B7" FromRole="Order_Details" ToRole="Users" />
+          <NavigationProperty Name="Payments" Relationship="Self.FK__Payment__Order_I__4CA06362" FromRole="Order_Details" ToRole="Payment" />
+          <NavigationProperty Name="Trackings" Relationship="Self.FK__Tracking__Order___4E88ABD4" FromRole="Order_Details" ToRole="Tracking" />
+          <Property Name="Ship_ID" Type="Int32" />
+          <NavigationProperty Name="Shipment" Relationship="MY_ProjectModel.FK__Order_Det__Ship___5070F446" FromRole="Order_Details" ToRole="Shipment" />
         </EntityType>
         <EntityType Name="Payment">
           <Key>
@@ -257,7 +276,7 @@
           <Property Name="Bill" Type="Double" Nullable="false" />
           <Property Name="Payment_Mode" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
           <Property Name="Payment_time" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Order_Details" Relationship="Self.FK__Payment__Order_I__37A5467C" FromRole="Payment" ToRole="Order_Details" />
+          <NavigationProperty Name="Order_Details" Relationship="Self.FK__Payment__Order_I__4CA06362" FromRole="Payment" ToRole="Order_Details" />
         </EntityType>
         <EntityType Name="Role">
           <Key>
@@ -278,6 +297,7 @@
           <Property Name="Distance" Type="Double" Nullable="false" />
           <Property Name="Company_ID" Type="Int32" />
           <NavigationProperty Name="Company" Relationship="Self.FK__Shipment__Compan__300424B4" FromRole="Shipment" ToRole="Company" />
+          <NavigationProperty Name="Order_Details" Relationship="MY_ProjectModel.FK__Order_Det__Ship___5070F446" FromRole="Shipment" ToRole="Order_Details" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
@@ -289,17 +309,6 @@
           <Property Name="version" Type="Int32" />
           <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
-        <EntityType Name="Tracking">
-          <Key>
-            <PropertyRef Name="Tracking_Number" />
-          </Key>
-          <Property Name="Order_ID" Type="Int32" />
-          <Property Name="Tracking_Number" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Company_ID" Type="Int32" />
-          <Property Name="Order_Status" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Company" Relationship="Self.FK__Tracking__Compan__34C8D9D1" FromRole="Tracking" ToRole="Company" />
-          <NavigationProperty Name="Order_Details" Relationship="Self.FK__Tracking__Order___33D4B598" FromRole="Tracking" ToRole="Order_Details" />
-        </EntityType>
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="Users_ID" />
@@ -308,10 +317,21 @@
           <Property Name="Email" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
           <Property Name="Password" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="Role_ID" Type="Int32" />
-          <NavigationProperty Name="Companies" Relationship="Self.FK__Company__User_id__2D27B809" FromRole="Users" ToRole="Company" />
-          <NavigationProperty Name="Order_Details" Relationship="Self.FK__Order_Det__User___29572725" FromRole="Users" ToRole="Order_Details" />
-          <NavigationProperty Name="Role" Relationship="Self.FK__Users__Role_ID__267ABA7A" FromRole="Users" ToRole="Roles" />
           <Property Name="user_status" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Companies" Relationship="Self.FK__Company__User_id__2D27B809" FromRole="Users" ToRole="Company" />
+          <NavigationProperty Name="Order_Details" Relationship="Self.FK__Order_Det__User___49C3F6B7" FromRole="Users" ToRole="Order_Details" />
+          <NavigationProperty Name="Role" Relationship="Self.FK__Users__Role_ID__267ABA7A" FromRole="Users" ToRole="Roles" />
+        </EntityType>
+        <EntityType Name="Tracking">
+          <Key>
+            <PropertyRef Name="Tracking_Number" />
+          </Key>
+          <Property Name="Order_ID" Type="Int32" />
+          <Property Name="Tracking_Number" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Company_ID" Type="Int32" />
+          <Property Name="Order_Status" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Company" Relationship="Self.FK__Tracking__Compan__4F7CD00D" FromRole="Tracking" ToRole="Company" />
+          <NavigationProperty Name="Order_Details" Relationship="Self.FK__Tracking__Order___4E88ABD4" FromRole="Tracking" ToRole="Order_Details" />
         </EntityType>
         <Association Name="FK__Company__User_id__2D27B809">
           <End Role="Users" Type="Self.User" Multiplicity="0..1" />
@@ -337,7 +357,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Tracking__Compan__34C8D9D1">
+        <Association Name="FK__Tracking__Compan__4F7CD00D">
           <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
           <End Role="Tracking" Type="Self.Tracking" Multiplicity="*" />
           <ReferentialConstraint>
@@ -349,7 +369,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Order_Det__User___29572725">
+        <Association Name="FK__Order_Det__User___49C3F6B7">
           <End Role="Users" Type="Self.User" Multiplicity="0..1" />
           <End Role="Order_Details" Type="Self.Order_Details" Multiplicity="*" />
           <ReferentialConstraint>
@@ -361,7 +381,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Payment__Order_I__37A5467C">
+        <Association Name="FK__Payment__Order_I__4CA06362">
           <End Role="Order_Details" Type="Self.Order_Details" Multiplicity="0..1" />
           <End Role="Payment" Type="Self.Payment" Multiplicity="*" />
           <ReferentialConstraint>
@@ -373,7 +393,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Tracking__Order___33D4B598">
+        <Association Name="FK__Tracking__Order___4E88ABD4">
           <End Role="Order_Details" Type="Self.Order_Details" Multiplicity="0..1" />
           <End Role="Tracking" Type="Self.Tracking" Multiplicity="*" />
           <ReferentialConstraint>
@@ -397,15 +417,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="MY_ProjectEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="MY_ProjectEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Companies" EntityType="Self.Company" />
           <EntitySet Name="Order_Details" EntityType="Self.Order_Details" />
           <EntitySet Name="Payments" EntityType="Self.Payment" />
           <EntitySet Name="Roles" EntityType="Self.Role" />
           <EntitySet Name="Shipments" EntityType="Self.Shipment" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
-          <EntitySet Name="Trackings" EntityType="Self.Tracking" />
           <EntitySet Name="Users" EntityType="Self.User" />
+          <EntitySet Name="Trackings" EntityType="Self.Tracking" />
           <AssociationSet Name="FK__Company__User_id__2D27B809" Association="Self.FK__Company__User_id__2D27B809">
             <End Role="Users" EntitySet="Users" />
             <End Role="Company" EntitySet="Companies" />
@@ -414,19 +434,19 @@
             <End Role="Company" EntitySet="Companies" />
             <End Role="Shipment" EntitySet="Shipments" />
           </AssociationSet>
-          <AssociationSet Name="FK__Tracking__Compan__34C8D9D1" Association="Self.FK__Tracking__Compan__34C8D9D1">
+          <AssociationSet Name="FK__Tracking__Compan__4F7CD00D" Association="Self.FK__Tracking__Compan__4F7CD00D">
             <End Role="Company" EntitySet="Companies" />
             <End Role="Tracking" EntitySet="Trackings" />
           </AssociationSet>
-          <AssociationSet Name="FK__Order_Det__User___29572725" Association="Self.FK__Order_Det__User___29572725">
+          <AssociationSet Name="FK__Order_Det__User___49C3F6B7" Association="Self.FK__Order_Det__User___49C3F6B7">
             <End Role="Users" EntitySet="Users" />
             <End Role="Order_Details" EntitySet="Order_Details" />
           </AssociationSet>
-          <AssociationSet Name="FK__Payment__Order_I__37A5467C" Association="Self.FK__Payment__Order_I__37A5467C">
+          <AssociationSet Name="FK__Payment__Order_I__4CA06362" Association="Self.FK__Payment__Order_I__4CA06362">
             <End Role="Order_Details" EntitySet="Order_Details" />
             <End Role="Payment" EntitySet="Payments" />
           </AssociationSet>
-          <AssociationSet Name="FK__Tracking__Order___33D4B598" Association="Self.FK__Tracking__Order___33D4B598">
+          <AssociationSet Name="FK__Tracking__Order___4E88ABD4" Association="Self.FK__Tracking__Order___4E88ABD4">
             <End Role="Order_Details" EntitySet="Order_Details" />
             <End Role="Tracking" EntitySet="Trackings" />
           </AssociationSet>
@@ -434,13 +454,29 @@
             <End Role="Roles" EntitySet="Roles" />
             <End Role="Users" EntitySet="Users" />
           </AssociationSet>
+          <AssociationSet Name="FK__Order_Det__Ship___5070F446" Association="MY_ProjectModel.FK__Order_Det__Ship___5070F446">
+            <End Role="Shipment" EntitySet="Shipments" />
+            <End Role="Order_Details" EntitySet="Order_Details" />
+          </AssociationSet>
         </EntityContainer>
+        <Association Name="FK__Order_Det__Ship___5070F446">
+          <End Type="MY_ProjectModel.Shipment" Role="Shipment" Multiplicity="0..1" />
+          <End Type="MY_ProjectModel.Order_Details" Role="Order_Details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Shipment">
+              <PropertyRef Name="Route_ID" />
+            </Principal>
+            <Dependent Role="Order_Details">
+              <PropertyRef Name="Ship_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="MY_ProjectModelStoreContainer" CdmEntityContainer="MY_ProjectEntities">
+        <EntityContainerMapping StorageEntityContainer="MY_ProjectModelStoreContainer" CdmEntityContainer="MY_ProjectEntities1">
           <EntitySetMapping Name="Companies">
             <EntityTypeMapping TypeName="MY_ProjectModel.Company">
               <MappingFragment StoreEntitySet="Company">
@@ -455,10 +491,11 @@
           <EntitySetMapping Name="Order_Details">
             <EntityTypeMapping TypeName="MY_ProjectModel.Order_Details">
               <MappingFragment StoreEntitySet="Order_Details">
+                <ScalarProperty Name="Ship_ID" ColumnName="Ship_ID" />
                 <ScalarProperty Name="Order_ID" ColumnName="Order_ID" />
                 <ScalarProperty Name="Order_Valuation" ColumnName="Order_Valuation" />
                 <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-                <ScalarProperty Name="Weight" ColumnName="Weight" />
+                <ScalarProperty Name="OrderWeight" ColumnName="OrderWeight" />
                 <ScalarProperty Name="Order_Source" ColumnName="Order_Source" />
                 <ScalarProperty Name="Order_Destination" ColumnName="Order_Destination" />
                 <ScalarProperty Name="Source_Description" ColumnName="Source_Description" />
@@ -512,6 +549,17 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="MY_ProjectModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="Users_ID" ColumnName="Users_ID" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Role_ID" ColumnName="Role_ID" />
+                <ScalarProperty Name="user_status" ColumnName="user_status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Trackings">
             <EntityTypeMapping TypeName="MY_ProjectModel.Tracking">
               <MappingFragment StoreEntitySet="Tracking">
@@ -519,17 +567,6 @@
                 <ScalarProperty Name="Tracking_Number" ColumnName="Tracking_Number" />
                 <ScalarProperty Name="Company_ID" ColumnName="Company_ID" />
                 <ScalarProperty Name="Order_Status" ColumnName="Order_Status" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Users">
-            <EntityTypeMapping TypeName="MY_ProjectModel.User">
-              <MappingFragment StoreEntitySet="Users">
-                <ScalarProperty Name="user_status" ColumnName="user_status" />
-                <ScalarProperty Name="Users_ID" ColumnName="Users_ID" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="Role_ID" ColumnName="Role_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -5,16 +5,20 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 using Project_ON_MVC.Models;
+using Project_ON_MVC.Services;
+
 
 namespace Logestic_Tracking.Controllers
 {
+
     public class UserController : Controller
     {
         // GET: User
-        MY_ProjectEntities context;
+        UserContext _user;
+    
         public UserController()
         {
-            context = new MY_ProjectEntities();
+           _user = new UserContext();
         }
         public ActionResult Index()
         {
@@ -28,21 +32,33 @@ namespace Logestic_Tracking.Controllers
         [HttpPost]
         public ActionResult Login(User user)
         {
-            User u = context.Users.Where(a => a.Email == user.Email && a.Password ==user.Password).SingleOrDefault();
-            FormsAuthentication.SetAuthCookie(user.Email,false);
+            var u = _user.Get().Where(a => a.Email == user.Email && a.Password == user.Password).ToList();
 
-            if (u == null)
+            Session["user_store"] = u[0].Users_ID;
+            if (u.Count() ==0)
             {
-                ViewData["msg"] = "Invalid id OR Password !!";
+                ViewBag.msg = "Invalid id OR Password !!";
                 return View();
             }
-            else if(u.user_status!="1")
+            else if (u[0].user_status!="1")
             {
                 ViewData["msg"] = "You Are not Verified till Now !!";
                 return View();
             }
-            
-             return RedirectToAction("About", "Home");
+
+            Session["email"] = u[0].Email;
+            if (u[0].Role_ID==11)
+            {
+                return RedirectToAction("Request_List","Admin");
+            }
+            else if (u[0].Role_ID==13)
+                     {
+              //  Session["user_store"] = u[0].Users_ID;
+                //TempData["comp_store"] = u[0].Users_ID;
+                return RedirectToAction("Search", "Company");
+            }
+           // Session["user_store"] = u[0].Users_ID;
+             return RedirectToAction("PlaceOrder", "Orders");
             
         }
 
@@ -60,15 +76,19 @@ namespace Logestic_Tracking.Controllers
             user.user_status = "1";
             if(ModelState.IsValid)
             {
-                
-                context.Users.Add(user);
-                context.SaveChanges();
+                _user.add(user);
             }
-
             return View(user);
-
+        }
+        public ActionResult LogOut()
+        {
+            Session.Abandon();
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Index", "Home");
         }
 
+            
+        
        
     }
 }

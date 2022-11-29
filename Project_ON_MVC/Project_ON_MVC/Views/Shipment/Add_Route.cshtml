@@ -1,0 +1,91 @@
+﻿@model Project_ON_MVC.Models.Shipment
+
+@{
+    ViewBag.Title = "Add_Route";
+}
+
+
+@using (Html.BeginForm("Add_Route", "Shipment", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+
+
+    <div class="login-page-1-2">
+
+        <h1 style="text-align:center">
+            Enter Route Details
+        </h1>
+
+       @*<form name="ship" class="route-form-4" id="form" action="~/Shipment/Add_Route" method="post">*@
+
+            <div>
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+                @if (@ViewBag.msg != null)
+                {
+                    <div style="border: 1px solid red">
+                        @ViewBag.msg
+                    </div>
+                }
+                <div class="input-control_1">
+                    <table width="80%" id="table_1">
+
+
+                        <tr>
+                            <td><div class="div_1"><input type="text" class="login_input_1" id="Source" placeholder="Source" required="required" name="Source"></div></td>
+                            <td><div class="div_1"><input type="text" class="login_input_1" id="Destination" placeholder="Destination" required="required" name="Destination"></div></td>
+                            <td><div class="div_1"><input type="number" class="login_input_1" id="Distance" placeholder="Distance" required="required" name="Distance" min="1" max="5000"></div></td>
+                            <td><div class="div_1"><input type="number" class="login_input_1" id="BasePrice" placeholder="Base Price" required="required" name="Base_Price"></div></td>
+                        </tr>
+                        <tr>
+                            <td colspan="4" style="text-align:center"></td>
+
+                        </tr>
+
+                    </table>
+                </div>
+
+                <div class="btn_sub" style="margin-left:20%">
+              @*      <button type="button" class="btn btn-success" onclick="addRow()" style="text-align:center;">Click to add row at the bottom of Table</button>*@
+                    <button type="submit"  value="Add_Route" class="btn btn-primary" style="text-align: center;margin-left:40px;margin-right:40px;">Submit</button>
+                @*    <button type="button" class="btn btn-danger" onclick="deleteRow()" style="text-align:center;margin-left:40px;">Click to delete row at the bottom of Table</button>*@
+                </div>
+            </div>
+   
+    </div>
+    
+
+}
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+
+    <script>
+
+        function addRow() {
+            var table = document.getElementById("table_1");
+            var rws = table.rows;
+            var cols = table.rows[0].cells.length;
+            var row = table.insertRow(rws.length);
+            var cell = row.insertCell(0);
+            cell.innerHTML = '<div class="div_1"><input type="text" class="login_input_1" id="Source" placeholder="Source" required="required" name="Source"></div>';
+            var cell1 = row.insertCell(1);
+            cell1.innerHTML = '<div class="div_1"><input type="text" class="login_input_1" id="Destination" placeholder="Destination" required="required" name="Destination">';
+            var cell2 = row.insertCell(2);
+            cell2.innerHTML = '<div class="div_1"><input type="text" class="login_input_1" id="Distance" placeholder="Distance" required="required" name="Distance" min="1" max="5000"></div>';
+            var cell3 = row.insertCell(3);
+            cell3.innerHTML = '<div><input type="text" class="login_input_1" id="BasePrice" placeholder="Base Price" required="required" name="Base_Price"></div>';
+        }
+        function deleteRow() {
+            var table = document.getElementById("table_1");
+            var rws = table.rows;
+            if (rws.length > 1) { document.getElementById("table_1").deleteRow(rws); }
+        }
+
+        function storeData() {
+
+        }
+
+    </script>

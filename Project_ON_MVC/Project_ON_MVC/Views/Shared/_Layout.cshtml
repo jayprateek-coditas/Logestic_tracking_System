@@ -2,10 +2,10 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">   
+    <title>@ViewBag.Title - My ASP.NET Application</title>                                      
+    @Styles.Render("~/Content/css")                                            
+    @Scripts.Render("~/bundles/modernizr")                                                 
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -20,12 +20,24 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Login", "Login", "User")</li>
-                    <li>@Html.ActionLink("User SignUp", "SignUp", "User")</li>
-                    <li>@Html.ActionLink("Company SignUp", "Register_", "Company")</li>
-                </ul>
+
+
+                    @if (Session["email"] != null)
+
+                    {
+                        <li>@Html.ActionLink("About", "About", "Home")</li>
+
+                        <li>@Html.ActionLink("User SignUp", "SignUp", "User")</li>
+                        <li>@Html.ActionLink("Company SignUp", "Register_", "Company")</li>
+                        <li>@Html.ActionLink("Register Comp", "Request_List", "Admin")</li>
+                        <li>@Html.ActionLink("Logout", "LogOut", "User")</li>
+                    }
+                    else
+                    {
+                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                        <li>@Html.ActionLink("Login", "Login", "User")</li>
+                    }
+                </ul> 
             </div>
         </div>
     </div>

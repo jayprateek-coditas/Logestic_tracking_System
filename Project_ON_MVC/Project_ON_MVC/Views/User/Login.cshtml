@@ -4,54 +4,133 @@
     ViewBag.Title = "Login";
 }
 
-<h2>Login</h2>
+   
 
+   /<!--using (Html.BeginForm())
+    {
+        Html.AntiForgeryToken()
 
-@using (Html.BeginForm()) 
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>User</h4>
+<div class="form-horizontal login-page">
+    <div class="form">
+        <div class="login">
+            <div class="login-header">
+
+            </div>
+        </div>
+
         <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        Html.ValidationSummary(true, "", new { class = "text-danger" })
 
         <div class="alert-danger">
-            @if (ViewData["msg"]!=null)
-                {
-                    @ViewData["msg"]
-                }
+            if (ViewData["msg"] != null)
+            {
+                ViewData["msg"]
+            }
         </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+        <h1>LOGIN</h1>
+        <div class="form-group input-control login-form">
+              Html.LabelFor(model => model.Email, htmlAttributes: new { class = "control-label col-md-2" })
+            <!--<div class="col-md-10">
+                Html.EditorFor(model => model.Email, new { htmlAttributes = new { class = "form-control", placeholder = " Email " } })
+                Html.ValidationMessageFor(model => model.Email, "", new { class = "text-danger" })
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+        <div class="form-group input-control">
+           Html.LabelFor(model => model.Password, htmlAttributes: new { class = "control-label col-md-2" })
+            <!--<div class="col-md-10">
+               Html.EditorFor(model => model.Password, new { htmlAttributes = new { class = "form-control", placeholder = "Password " } })
+                Html.ValidationMessageFor(model => model.Password, "", new { class = "text-danger", })
             </div>
         </div>
 
-        
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
+
+        <div class="from-group button_1">
+            <div class="col-md-10">
                 <input type="submit" value="Login" class="btn btn-default" />
             </div>
         </div>
+
+        <p class="message">
+            <b> Not registered? </b>
+            <div class="from-group">
+                Html.ActionLink("Register User", "SignUp", "User", htmlAttributes: new { class = "buttonAb" })
+                <span>&nbsp;</span>
+                Html.ActionLink("Register Company", "Register_", "Company")
+            </div>
     </div>
-}
+    </div>
+    }
 
-<div>
-    @Html.ActionLink("Back to SignUp", "SignUp")
-</div>
+    <div>
+       Html.ActionLink("Back to SignUp", "SignUp")
+    </div>
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+
+
+
+
+    Html.ActionLink("Register Company", "Register_", "Company")
+    Html.ActionLink("Register User", "SignUp", "User")-->
+
+
+
+
+
+
+
+
+
+
+
+    <div class="login-page">
+            <div class="form">
+                <div class="login">
+                    <div class="login-header">
+
+                    </div>
+                </div>
+                <form name="form" class="login-form" id="form" action="~/User/Login" method="post">
+
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true)
+                    @if (@ViewBag.msg != null)
+                    {
+                        <div style="border: 1px solid red">
+                            @ViewBag.msg
+                        </div>
+                    }
+                    <h1 ><b>LOGIN</b></h1>
+                    <div class="input-control">
+                        <input type="email" class="login__input" id="Email" placeholder="Email" required="required" name="Email">
+                        <div class="error"></div>
+                    </div>
+                    <div class="input-control">
+                        <input type="password" class="login__input" id="Password" placeholder="Password" required="required" name="Password">
+                        <div class="error"></div>
+                    </div>
+                    <button class="button_1 btn-primary" type="submit"  >LOGIN HERE</button>
+                    <p class="message">
+                        <b> Not registered? </b>
+                        <div>
+                            <button>@Html.ActionLink("Register User", "SignUp", "User")</button>
+                            <span>&nbsp;</span>
+                            <button>@Html.ActionLink("Register Company", "Register_", "Company")</button>
+                        </div>
+                </form>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }

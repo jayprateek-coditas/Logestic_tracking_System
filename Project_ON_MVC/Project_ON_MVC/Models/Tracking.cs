@@ -15,7 +15,7 @@ namespace Project_ON_MVC.Models
     public partial class Tracking
     {
         public Nullable<int> Order_ID { get; set; }
-        public decimal Tracking_Number { get; set; }
+        public int Tracking_Number { get; set; }
         public Nullable<int> Company_ID { get; set; }
         public string Order_Status { get; set; }
     

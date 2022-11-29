@@ -1,0 +1,75 @@
+﻿@model IEnumerable<Project_ON_MVC.Models.Tracking>
+
+@{
+    ViewData["Title"] = "Search";
+}
+
+
+
+<form asp-controller="Company" asp-action="Search" method="post">
+    <div class="form-out">
+        <div class="search">
+            <input type="text" name="str" class="searchTerm" value="" placeholder="Search By Tracking ID">
+            <button type="submit" class="searchButton">
+                Search
+            </button>
+        </div>
+    </div>
+
+</form>
+<div class="t_1">
+    @if (Model.Count() > 0)
+    {
+
+        <table class="table .thead-dark">
+            <thead>
+                <tr>
+                    <th>
+                        Tracking Number : 
+                    
+                    </th>
+                    <th>
+                        Company ID :
+                    
+                    </th>
+                    <th>
+                        Order ID :
+                    
+                    </th>
+                    <th>
+                        Order Status : 
+                    
+                    </th>
+                    <th>
+                        <b> Update Status </b>
+                    </th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            &nbsp; @Html.DisplayFor(modelItem => item.Tracking_Number)
+                        </td>
+                        <td>
+                            &nbsp;@Html.DisplayFor(modelItem => item.Company_ID)
+                        </td>
+                        <td>
+                            &nbsp;@Html.DisplayFor(modelItem => item.Order_ID)
+                        </td>
+                        <td>
+                            &nbsp;@Html.DisplayFor(modelItem => item.Order_Status)
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-success">  @Html.ActionLink("Update", "Tracking_Update", "Tracking", new { id = item.Tracking_Number}, new { area = "" })</button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+
+    }
+</div>

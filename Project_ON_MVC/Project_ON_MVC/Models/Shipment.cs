@@ -14,6 +14,12 @@ namespace Project_ON_MVC.Models
     
     public partial class Shipment
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Shipment()
+        {
+            this.Order_Details = new HashSet<Order_Details>();
+        }
+    
         public int Route_ID { get; set; }
         public string Source { get; set; }
         public string Destination { get; set; }
@@ -22,5 +28,7 @@ namespace Project_ON_MVC.Models
         public Nullable<int> Company_ID { get; set; }
     
         public virtual Company Company { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Order_Details> Order_Details { get; set; }
     }
 }
