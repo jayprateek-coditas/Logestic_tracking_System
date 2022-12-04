@@ -1,55 +1,40 @@
 ﻿@model Project_ON_MVC.Models.Tracking
 
-@{
-    ViewBag.Title = "Tracking_Update";
-}
 
-<h2>Tracking_Update</h2>
+<style>
+  .container-12{
+       margin-left:35%;
+       margin-top:50px;
+       margin-right:20%;
+       width:420px;
+       background-color:ghostwhite;
+       font-family:Courier New, Courier, monospace;
+      padding:20px;
+  }
+</style>
+<body style="background-image: url('/Images/update.jpg'); background-size: cover;">
+    @using (Html.BeginForm("Tracking_Update", "Tracking", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
 
-@using (Html.BeginForm("Tracking_Update","Tracking", FormMethod.Post))
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>Tracking</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.Order_ID, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DisplayFor(model => model.Order_ID)
-                @Html.ValidationMessageFor(model => model.Order_ID, "", new { @class = "text-danger" })
+        <div class="container-12">
+            <h3 style="text-align:center;color:cadetblue"><b>UPDATE STATUS</b></h3>
+            <hr />
+            <h4><b>TRACKING NUMBER :</b> @Html.DisplayFor(model => model.Tracking_Number)</h4>
+            <h5><b>ORDER TIMING : @Html.DisplayFor(model => model.Order_Details.Order_Time)</b></h5>
+            <br />
+            <hr />
+            <h4><b>SOURCE : </b>@Html.DisplayFor(model => model.Order_Details.Source_Description)</h4>
+            <h4><b>DESTINATION : </b>@Html.DisplayFor(model => model.Order_Details.Dest_Description)</h4>
+            <br />
+            <span><b>UPDATE STATUS :</b> </span>
+            @Html.DropDownListFor(model => model.Order_Status, new SelectList(ViewBag.order_stages), " ----- select status ----- ")
+            @Html.ValidationMessageFor(model => model.Order_Status, "", new { @class = "text-danger" })
+            <br />
+            <div style="margin:20px">
+                <input type="submit" value="Save" class="btn btn-success" />
             </div>
         </div>
+    }
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Tracking_Number, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DisplayFor(model => model.Tracking_Number)
-                @Html.ValidationMessageFor(model => model.Tracking_Number, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Order_Status, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.Order_Status, new SelectList((List<String>)TempData["order_stages"]))
-                @{TempData.Keep("order_stages");
-                }
-                @Html.ValidationMessageFor(model => model.Order_Status, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
-        </div>
-    </div>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+</body>

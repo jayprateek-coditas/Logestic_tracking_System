@@ -1,48 +1,85 @@
 ﻿@model Project_ON_MVC.Models.Payment
 
-@{
-    ViewBag.Title = "Pay";
-}
 
-<h2>Pay</h2>
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
+<body style="background-image: url('/Images/logistic_2.jpg'); background-size: cover;">
+    @using (Html.BeginForm("Pay", "Orders", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
-        <h4>Payment</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-       
 
-       <span>Hou Have to Pay</span> @Session["Bill"] <span>To Place your Order </span>  
-        <div class="form-group">
-            @Html.LabelFor(model => model.Bill, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Bill, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Bill, "", new { @class = "text-danger" })
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <style>
+            .container_outer_1 {
+                display: grid;
+                display: grid;
+                grid-template-columns: 220px 220px;
+                grid-template-rows: auto auto auto auto;
+                grid-column-gap: 20px;
+                margin-left: 70px;
+            }
+
+            .payment1 {
+                background-color: ghostwhite;
+                margin-left: 20%;
+                margin-right: 20%;
+            }
+
+            .payment-1 {
+                grid-column: 1/2;
+            }
+
+            .payment-3 {
+                grid-column: 1/3;
+                margin-left: 130px;
+                grid-row: 4/4;
+            }
+        </style>
+
+        <div class="payment1">
+            <h3 style="margin-left:8%"><b>Payment</b></h3>
+            <h5 style="margin-left:8%">INVOICE  NO : @Html.DisplayFor(model => model.Invoice_No)</h5>
+            <h5 style="margin-left:8%">
+                <b>  BILL : @Html.DisplayFor(model => model.Bill)</b>
+            </h5>
+            <label for="fname" style="margin-left:8%">Accepted Cards</label>
+            <div class="icon-container" style="margin-left:8%">
+                <i class="fa fa-cc-visa" style="color:navy;"></i>
+                <i class="fa fa-cc-amex" style="color:blue;"></i>
+                <i class="fa fa-cc-mastercard" style="color:red;"></i>
+                <i class="fa fa-cc-discover" style="color:orange;"></i>
+            </div>
+
+            <div class="container_outer_1">
+                <div class="payment-1">
+                    <label for="cname">Name on Card</label>
+                    <input type="text" id="cname" name="cardname" placeholder="John Deep" required>
+                </div>
+                <div class="payment-2">
+                    <label for="ccnum">Credit card number</label>
+                    <input type="text" id="ccnum" name="cardnumber" placeholder="1234-0000-0000-4411" required>
+                </div>
+
+
+                <div class="payment-1">
+                    <label for="expyear">Exp Year</label>
+                    <input type="number" placeholder="2018" min="2018" max="2032" required>
+                </div>
+                <div class="payment-2">
+                    <label for="expmonth">Exp Month</label>
+                    <input type="text" placeholder="MAY" required>
+                </div>
+
+                <div class="payment-1">
+                    <label for="cvv">CVV</label>
+                    <input type="password" id="cvv" name="cvv" placeholder="***" min="3" max="3" required>
+                </div>
+                <div class="payment-3">
+                    <input type="submit" value="Pay" class="btn btn-success" />
+                </div>
             </div>
         </div>
+    }
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Payment_Mode, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.Payment_Mode, new SelectList((List<String>)TempData["list"]))
-                 @{TempData.Keep("list");
-                 }
-             </div>
-        </div>
-
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </div>
-    </div>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+    </body>

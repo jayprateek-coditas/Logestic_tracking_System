@@ -3,21 +3,19 @@
 @{
     ViewBag.Title = "Add_Route";
 }
+<body class="btn-route" style="background-image: url('/Images/logistic_2.jpg'); background-size: cover;">
 
 
-@using (Html.BeginForm("Add_Route", "Shipment", FormMethod.Post))
-{
-    @Html.AntiForgeryToken()
+    @using (Html.BeginForm("Add_Route", "Shipment", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
 
 
 
-    <div class="login-page-1-2">
+        <div class="login-page-1-2">
 
-        <h1 style="text-align:center">
-            Enter Route Details
-        </h1>
 
-       @*<form name="ship" class="route-form-4" id="form" action="~/Shipment/Add_Route" method="post">*@
+            @*<form name="ship" class="route-form-4" id="form" action="~/Shipment/Add_Route" method="post">*@
 
             <div>
                 @Html.AntiForgeryToken()
@@ -28,40 +26,34 @@
                         @ViewBag.msg
                     </div>
                 }
-                <div class="input-control_1">
-                    <table width="80%" id="table_1">
+                <div style="margin-top:100px;background-color:gainsboro;padding-top:20px;padding-bottom:20px;border-block-color:aquamarine;border-radius:8px;">
+                    <div class="input-control_1" style="margin-left:150px">
+                        <table width="90%" id="table_1">
 
+                            <tr>
+                                <td style="width:250px"><div class="div_1"><input type="text" class="login_input_1" id="Source" placeholder="Source" required="required" name="Source"></div></td>
+                                <td style="width:250px"><div class="div_1"><input type="text" class="login_input_1" id="Destination" placeholder="Destination" required="required" name="Destination"></div></td>
+                                <td style="width:250px"><div class="div_1"><input type="number" class="login_input_1" id="Distance" placeholder="Distance" required="required" name="Distance" min="1" max="5000"></div></td>
+                                <td style="width:250px"><div class="div_1"><input type="number" class="login_input_1" id="BasePrice" placeholder="Base Price" required="required" name="Base_Price"min="1" max="10" ></div></td>
+                            </tr>
+                            <tr>
+                                <td colspan="4" style="text-align:center"></td>
+                            </tr>
 
-                        <tr>
-                            <td><div class="div_1"><input type="text" class="login_input_1" id="Source" placeholder="Source" required="required" name="Source"></div></td>
-                            <td><div class="div_1"><input type="text" class="login_input_1" id="Destination" placeholder="Destination" required="required" name="Destination"></div></td>
-                            <td><div class="div_1"><input type="number" class="login_input_1" id="Distance" placeholder="Distance" required="required" name="Distance" min="1" max="5000"></div></td>
-                            <td><div class="div_1"><input type="number" class="login_input_1" id="BasePrice" placeholder="Base Price" required="required" name="Base_Price"></div></td>
-                        </tr>
-                        <tr>
-                            <td colspan="4" style="text-align:center"></td>
+                        </table>
+                    </div>
 
-                        </tr>
-
-                    </table>
-                </div>
-
-                <div class="btn_sub" style="margin-left:20%">
-              @*      <button type="button" class="btn btn-success" onclick="addRow()" style="text-align:center;">Click to add row at the bottom of Table</button>*@
-                    <button type="submit"  value="Add_Route" class="btn btn-primary" style="text-align: center;margin-left:40px;margin-right:40px;">Submit</button>
-                @*    <button type="button" class="btn btn-danger" onclick="deleteRow()" style="text-align:center;margin-left:40px;">Click to delete row at the bottom of Table</button>*@
+                    <div class="btn_sub-1" style="margin-left:30% ;margin-right:30%">
+                        @*      <button type="button" class="btn btn-success" onclick="addRow()" style="text-align:center;">Click to add row at the bottom of Table</button>*@
+                        <button type="submit" value="Add_Route" class="btn btn-primary" style="text-align: center;margin-left:40px;margin-right:40px;">Submit</button>
+                        @*    <button type="button" class="btn btn-danger" onclick="deleteRow()" style="text-align:center;margin-left:40px;">Click to delete row at the bottom of Table</button>*@
+                    </div>
                 </div>
             </div>
-   
-    </div>
-    
+        </div>
+    }
 
-}
-
-    <div>
-        @Html.ActionLink("Back to List", "Index")
-    </div>
-
+</body>
     <script>
 
         function addRow() {

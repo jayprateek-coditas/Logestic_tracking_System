@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">   
-    <title>@ViewBag.Title - My ASP.NET Application</title>                                      
+   
     @Styles.Render("~/Content/css")                                            
     @Scripts.Render("~/bundles/modernizr")                                                 
 </head>
@@ -16,7 +16,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+               
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
@@ -25,17 +25,40 @@
                     @if (Session["email"] != null)
 
                     {
-                        <li>@Html.ActionLink("About", "About", "Home")</li>
+                        @*<li>@Html.ActionLink("About", "About", "Home")</li>*@
 
-                        <li>@Html.ActionLink("User SignUp", "SignUp", "User")</li>
-                        <li>@Html.ActionLink("Company SignUp", "Register_", "Company")</li>
-                        <li>@Html.ActionLink("Register Comp", "Request_List", "Admin")</li>
+                        @*<li>@Html.ActionLink("User SignUp", "SignUp", "User")</li>*@
                         <li>@Html.ActionLink("Logout", "LogOut", "User")</li>
+                        if ((int)Session["Role"] == 12)
+                        {
+                            //    <li>@Html.ActionLink("PlaceOrder", "PlaceOrder", "Order")</li>
+                            <li>@Html.ActionLink("ShowPlacedOrder", "ShowPlacedOrder", "Orders")</li>
+                            <li>@Html.ActionLink("Search", "Search", "Company")</li>
+                            <li>@Html.ActionLink("PendingOrders", "ShowUnPaidOrder", "Orders")</li>
+                            <li>@Html.ActionLink("Place Order", "PlaceOrder", "Orders")</li>
+                        }
+                        else if ((int)Session["Role"] == 13)
+                        {
+                            <li>@Html.ActionLink("AllOrders", "DisplayCompany_Orders", "Company")</li>
+                            <li>@Html.ActionLink("Search", "Search", "Company")</li>
+                            <li>@Html.ActionLink("Add Route ", "Add_Route", "Shipment")</li>
+                            <li>@Html.ActionLink("Pending Orders", "TrackingStatusUpdate", "Tracking")</li>
+                            <li>@Html.ActionLink("Routes", "ShowAllRoutes","Company")</li>
+                        }
+                        else
+                        {
+
+                            <li>@Html.ActionLink("Register Comp", "Request_List", "Admin")</li>
+                            <li>@Html.ActionLink("Search", "Search", "Company")</li>
+                            <li>@Html.ActionLink("Users", "Users", "Admin")</li>
+                            <li>@Html.ActionLink("Orders", "ShowOrders", "Admin")</li>
+                            <li>@Html.ActionLink("Companies", "Companies", "Admin")</li>
+                        }
                     }
                     else
                     {
-                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
                         <li>@Html.ActionLink("Login", "Login", "User")</li>
+                        <li>@Html.ActionLink("Track Order", "Search", "Company")</li>
                     }
                 </ul> 
             </div>
@@ -44,9 +67,7 @@
     <div class="container body-content">
         @RenderBody()
         <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
+       
     </div>
 
     @Scripts.Render("~/bundles/jquery")

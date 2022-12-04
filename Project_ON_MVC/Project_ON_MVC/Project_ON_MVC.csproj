@@ -177,6 +177,7 @@
     <Compile Include="Models\User.cs">
       <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\UsersRoleProvider.cs" />
     <Compile Include="Services\PaymentContext.cs" />
     <Compile Include="Services\Register_Company.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -196,6 +197,22 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\backIMage.jpg" />
+    <Content Include="Images\comp.jpg" />
+    <Content Include="Images\delivary_13.jpeg" />
+    <Content Include="Images\logestic_admin.jpg" />
+    <Content Include="Images\logestic_comp.jpg" />
+    <Content Include="Images\logistic_2.jpg" />
+    <Content Include="Images\orderImage.jpg" />
+    <Content Include="Images\orderIMAGES.jpg" />
+    <Content Include="Images\pexels-david-dibert-1117210.jpg" />
+    <Content Include="Images\pexels-tom-fisk-3057960.jpg" />
+    <Content Include="Images\place order.jpg" />
+    <Content Include="Images\route2.jpg" />
+    <Content Include="Images\routes.jpg" />
+    <Content Include="Images\routes1.jpg" />
+    <Content Include="Images\routes3.jpg" />
+    <Content Include="Images\update.jpg" />
     <Content Include="Models\Model2.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model2.edmx</DependentUpon>
@@ -253,6 +270,13 @@
     <Content Include="Views\Company\DisplayCompany_Orders.cshtml" />
     <Content Include="Views\Company\Search.cshtml" />
     <Content Include="Views\Tracking\Tracking_Update.cshtml" />
+    <Content Include="Views\Admin\ShowOrders.cshtml" />
+    <Content Include="Views\Admin\Companies.cshtml" />
+    <Content Include="Views\Admin\Users.cshtml" />
+    <Content Include="Views\Orders\ShowUnPaidOrder.cshtml" />
+    <Content Include="Views\Tracking\TrackingStatus.cshtml" />
+    <Content Include="Views\Tracking\TrackingStatusUpdate.cshtml" />
+    <Content Include="Views\Company\ShowAllRoutes.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

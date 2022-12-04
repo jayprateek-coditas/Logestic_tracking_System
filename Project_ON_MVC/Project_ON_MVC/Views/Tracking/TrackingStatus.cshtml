@@ -1,0 +1,91 @@
+﻿@model Project_ON_MVC.Models.Tracking
+
+@{
+    ViewData["Title"] = "Search";
+}
+
+<body style="background-image: url('/Images/orderImage.jpg'); background-size: cover;">
+
+
+
+
+    <div class="t_1">
+        <div class="body_1">
+            <div class="container-1">
+                <article class="card" style="margin-left:10px">
+                    <header class="card-header"> My Orders / Tracking </header>
+                    <div class="card-body" style="margin-left:10px">
+                        
+                        <article class="card">
+                            <div class="card-body row" style="margin-left:10px">
+                                <div class="col"> <strong>Order Placed Time:</strong> @Html.DisplayFor(model => model.Order_Details.Order_Time)<br> </div>
+                                <div class="col"> <strong>Company ID:</strong>  @Html.DisplayFor(model => model.Company.Company_Name), | <i class="fa fa-phone"></i>@Html.DisplayFor(model => model.Company.Contact_Number) <br> </div>
+                                <div class="col"> <strong>Status:</strong> <br>@Html.DisplayFor(model => model.Order_Status) </div>
+                                <div class="col"> <strong>Tracking #:</strong> <br> @Html.DisplayFor(model => model.Tracking_Number) </div>
+                                <div class="col"> <strong>Destination Address #:</strong> <br> @Html.DisplayFor(model => model.Order_Details.Order_Destination) </div>
+                            </div>
+                        </article>
+                        @if (Model.Order_Status == "Order in Process")
+                        {<div class="track">
+                                <div class="step active"> <span class="icon"> <i class="fa fa-check"></i> </span> <span class="text">Order in Process</span> </div>
+                                <div class="step "> <span class="icon"> <i class="fa fa-user"></i> </span> <span class="text"> Order is Picked</span> </div>
+                                <div class="step "> <span class="icon"> <i class="fa fa-truck"></i> </span> <span class="text"> "Order out for Delivary" </span> </div>
+                                <div class="step"> <span class="icon"> <i class="fa fa-box"></i> </span> <span class="text">"Order Successfully Delivary"</span> </div>
+                            </div>
+                            <hr>
+                            //"Order Shipped", "Order out for Delivary", "Order Successfully Delivary"
+                        }
+                        else if (Model.Order_Status == "Order is Picked")
+                        {
+                            <div class="track">
+                                <div class="step active"> <span class="icon"> <i class="fa fa-check"></i> </span> <span class="text">Order in Process</span> </div>
+                                <div class="step active"> <span class="icon"> <i class="fa fa-user"></i> </span> <span class="text"> Order is Picked</span> </div>
+                                <div class="step "> <span class="icon"> <i class="fa fa-truck"></i> </span> <span class="text"> Order Shipped </span> </div>
+                                <div class="step "> <span class="icon"> <i class="fa fa-truck"></i> </span> <span class="text"> Order out for Delivary </span> </div>
+                                <div class="step"> <span class="icon"> <i class="fa fa-box"></i> </span> <span class="text">Order Successfully Delivary</span> </div>
+                            </div>
+                            <hr>
+                        }
+                        else if (Model.Order_Status == "Order Shipped")
+                        {
+                            <div class="track">
+                                <div class="step active"> <span class="icon"> <i class="fa fa-check"></i> </span> <span class="text">Order in Process</span> </div>
+                                <div class="step active"> <span class="icon"> <i class="fa fa-user"></i> </span> <span class="text"> Order is Picked</span> </div>
+                                <div class="step active"> <span class="icon"> <i class="fa fa-truck"></i> </span> <span class="text"> Order Shipped </span> </div>
+                                <div class="step "> <span class="icon"> <i class="fa fa-truck"></i> </span> <span class="text"> Order out for Delivary </span> </div>
+                                <div class="step"> <span class="icon"> <i class="fa fa-box"></i> </span> <span class="text">Order Successfully Delivary</span> </div>
+                            </div>
+                            <hr>
+                        }
+                        else if (Model.Order_Status == "Order out for Delivary")
+                        {
+                            <div class="track">
+                                <div class="step active"> <span class="icon"> <i class="fa fa-check"></i> </span> <span class="text">Order in Process</span> </div>
+                                <div class="step active"> <span class="icon"> <i class="fa fa-user"></i> </span> <span class="text"> Order is Picked</span> </div>
+                                <div class="step active"> <span class="icon"> <i class="fa fa-truck"></i> </span> <span class="text"> Order Shipped </span> </div>
+                                <div class="step active"> <span class="icon"> <i class="fa fa-truck"></i> </span> <span class="text"> Order out for Delivary </span> </div>
+                                <div class="step"> <span class="icon"> <i class="fa fa-box"></i> </span> <span class="text">Order Successfully Delivary</span> </div>
+                            </div>
+                            <hr>
+                        }
+                        else if (Model.Order_Status == "Order Successfully Delivary")
+                        {
+                            <div class="track">
+                                <div class="step active"> <span class="icon"> <i class="fa fa-check"></i> </span> <span class="text">Order in Process</span> </div>
+                                <div class="step active"> <span class="icon"> <i class="fa fa-user"></i> </span> <span class="text"> Order is Picked</span> </div>
+                                <div class="step active"> <span class="icon"> <i class="fa fa-truck"></i> </span> <span class="text"> Order Shipped </span> </div>
+                                <div class="step active"> <span class="icon"> <i class="fa fa-truck"></i> </span> <span class="text"> Order out for Delivary </span> </div>
+                                <div class="step active"> <span class="icon"> <i class="fa fa-box"></i> </span> <span class="text">Order Successfully Delivary</span> </div>
+                            </div>
+                            <hr>
+                        }
+
+
+                </article>
+            </div>
+        </div>
+
+
+    </div>
+
+</body>

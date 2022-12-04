@@ -1,0 +1,30 @@
+﻿@model IEnumerable<Project_ON_MVC.Models.Shipment>
+
+
+
+
+
+
+<style>
+    .container_inner1 {
+        margin-left: 20%;
+        background-color:yellow;
+    }
+</style>
+
+<body class="routes-body">
+    <h2 style="text-align:center;font-family:Cambria, Cochin, Georgia, Times, Times New Roman, serif;font-display:block;"><b>ROUTES</b></h2>
+    <div class="container_inner1" style="margin-right:15%; background-color:aqua;">
+        @foreach (var item in Model)
+        {
+            <div class="track" >
+
+                <div class="step active"> <span class="icon"> <i class="fa fa-check"></i> </span> <span class="text">@Html.DisplayFor(modelItem => item.Source)</span> </div>
+                <div class="step active"> <span class="icon"> <i class="fa fa-user"></i> </span> <span class="text"> @Html.DisplayFor(modelItem => item.Destination)</span> </div>
+            </div>
+
+
+        }
+    </div>
+
+</body>

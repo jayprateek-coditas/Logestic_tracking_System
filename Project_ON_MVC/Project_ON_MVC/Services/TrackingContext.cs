@@ -54,7 +54,6 @@ namespace Project_ON_MVC.Services
                 if (record == null)
                     throw new Exception($"The Record with Category Id {id} is Missing");
                 return record;
-
             }
             catch (Exception ex)
             {

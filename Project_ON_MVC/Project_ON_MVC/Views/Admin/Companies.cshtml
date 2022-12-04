@@ -1,0 +1,86 @@
+﻿@model IEnumerable<Project_ON_MVC.Models.Company>
+
+
+
+<body class="admin-div">
+    @*<table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Company_ID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Company_Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Address)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Contact_Number)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.User_ids)
+                </th>
+                <th></th>
+            </tr>
+
+        @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Company_ID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Company_Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Contact_Number)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.User_ids)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                </td>
+            </tr>
+        }
+
+        </table>*@
+
+
+        <div class="bg-image h-100" style="background-color: #8ebcdb; margin-top:5%">
+            <table class="table table-striped .thead-dark" >
+                <thead>
+                    <tr>
+                        <th scope="col">Company ID</th>
+                        <th scope="col">Company Name</th>
+                        <th scope="col">Address</th>
+                        <th scope="col">Contact Number</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Company_ID)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Company_Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Address)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Contact_Number)
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+</body>
+

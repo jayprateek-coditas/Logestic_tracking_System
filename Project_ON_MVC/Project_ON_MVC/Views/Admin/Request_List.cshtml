@@ -2,63 +2,60 @@
 
 @model List<Register_Company>
 
-@{
-    ViewBag.Title = "Request_List";
-}
 
-@*<h2>Request_List</h2>*@
+<body class="admin-div">
+    <div style="margin:10px;background-color:palegoldenrod">
+        <h3 style="text-align:center">List of Request</h3>
+        <hr />
+        <table class="table table-bordered .thead-dark">
+            <thead>
+                <tr>
+                    <th>
+                        Company ID
+                    </th>
+                    <th>
+                        Company Name
+                    </th>
+                    <th>
+                        ContectNumber
+                    </th>
+                    <th>
+                        Address
+                    </th>
+                    <th style="text-align:center">
+                        &nbsp;&nbsp; Take Action
+                    </th>
 
+                </tr>
+            </thead>
 
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.company.Company_ID)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.company.Company_Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.company.Contact_Number)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.company.Address)
+                        </td>
+                        <td style="text-align:center ;color:white;text-decoration-line:none">
+                            <button type="button" class="btn btn-success"> @Html.ActionLink("Approve", "Approve", new { id = item.company.User_ids })</button>
 
-<h3>List of Request</h3>
-<table class="table table-bordered table-striped">
-    <thead>
-        <tr>
-            <th>
-                Company ID
-            </th>
-            <th>
-                Company Name
-            </th>
-            <th>
-                ContectNumber
-            </th>
-            <th>
-                Address
-            </th>
-            <th style="text-align:center">
-               &nbsp;&nbsp; Take Action 
-            </th>
-            
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.company.Company_ID)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.company.Company_Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.company.Contact_Number)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.company.Address)
-                </td>
-                <td style="text-align:center ;color:white;text-decoration-line:none">
-                   <button type="button" class="btn btn-success"> @Html.ActionLink("Approve", "Approve", new { id = item.company.User_ids })</button>
-                
-                    &nbsp;&nbsp;
-                  <button type="button" class="btn btn-danger">  @Html.ActionLink("Delete", "Delete", new { id = item.user.Users_ID })</button>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
-<hr />
+                            &nbsp;&nbsp;
+                            <button type="button" class="btn btn-danger">  @Html.ActionLink("Delete", "Delete", new { id = item.user.Users_ID })</button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <hr />
 
-    
-
+    </div>
+</body>

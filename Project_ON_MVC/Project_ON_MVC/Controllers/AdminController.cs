@@ -14,16 +14,17 @@ namespace Project_ON_MVC.Controllers
 
         UserContext _user;
         CompanyContext _comp;
-
+        OrdersContext _orders;
 
          public AdminController()
         {
             _user = new UserContext();
             _comp = new CompanyContext();
+            _orders = new OrdersContext();
         }
 
-       
-        
+
+
         public ActionResult Request_List()
         {
             List<User> users = _user.Get().ToList();
@@ -66,6 +67,28 @@ namespace Project_ON_MVC.Controllers
             return RedirectToAction("Request_List");
         }
         
-        
+        public ActionResult ShowOrders()
+        {
+           var data= _orders.Get();   
+            return View(data);
+        }
+
+        public ActionResult Companies()
+        {
+            var data = _comp.Get();
+            return View(data);
+        }
+
+        public ActionResult Users()
+        {
+            var data = _user.Get();
+            return View(data);
+        }
+        public ActionResult Disable(int userid)
+        {
+
+            return View();
+        }
+
     }
 }

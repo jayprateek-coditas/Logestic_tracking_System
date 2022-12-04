@@ -4,9 +4,8 @@
     ViewBag.Title = "Login";
 }
 
-   
 
-   /<!--using (Html.BeginForm())
+<!--using (Html.BeginForm())
     {
         Html.AntiForgeryToken()
 
@@ -76,21 +75,15 @@
 
 
 
-
-
-
-
-
-
-
-
+<body class="login-body">
     <div class="login-page">
-            <div class="form">
-                <div class="login">
-                    <div class="login-header">
+        <div class="form">
+            <div class="login">
+                <div class="login-header">
 
-                    </div>
                 </div>
+            </div>
+            <div class="wrapper">
                 <form name="form" class="login-form" id="form" action="~/User/Login" method="post">
 
                     @Html.AntiForgeryToken()
@@ -101,7 +94,7 @@
                             @ViewBag.msg
                         </div>
                     }
-                    <h1 ><b>LOGIN</b></h1>
+                    <h1 class="h_1"><b>LOGIN</b></h1>
                     <div class="input-control">
                         <input type="email" class="login__input" id="Email" placeholder="Email" required="required" name="Email">
                         <div class="error"></div>
@@ -114,13 +107,63 @@
                     <p class="message">
                         <b> Not registered? </b>
                         <div>
-                            <button>@Html.ActionLink("Register User", "SignUp", "User")</button>
+                            @Html.ActionLink("Register User", "SignUp", "User",null, new { @class = "btn btn-primary", @style="color:white"})
                             <span>&nbsp;</span>
-                            <button>@Html.ActionLink("Register Company", "Register_", "Company")</button>
+                            @Html.ActionLink("Register Company", "Register_", "Company", null, new { @class="btn btn-primary",@style="color:white"})
                         </div>
                 </form>
             </div>
         </div>
+    </div>
+</body>
+
+
+
+
+
+
+
+
+
+<!--<body>
+    <div class="outer-cont">
+        <div class="wrapper">
+            Html.AntiForgeryToken()
+            Html.ValidationSummary(true)
+            if (ViewBag.msg != null)
+            {
+                <div style="border: 1px solid red">
+                    ViewBag.msg
+                </div>
+            }
+            <h1><b>Sign In<b></h1>
+            <form name="form" class="login-form" id="form" action="~/User/Login" method="post">
+                <input type="text" placeholder="Email" name="Email" required="required">
+
+                <input type="password" placeholder="Password" name="Password" required="required">
+
+            </form>-->
+            @*<div class="terms">
+                <input type="checkbox" id="checkbox">
+                <label for="checkbox">
+                    I agree on these
+                    <a href="#">Terms and Conditions </a>
+                </label>
+            </div>*@
+            <!--<button type="submit">Sign IN</button>
+            <div class="member">
+                Don't have an account? <a href="./login.html">
+                    Login here
+                </a>
+
+            </div>
+            <div>
+                <button>Html.ActionLink("Register User", "SignUp", "User")</button>
+                <span>&nbsp;</span>
+                <button>Html.ActionLink("Register Company", "Register_", "Company")</button>
+            </div>
+        </div>
+    </div>--->
 
 
 
@@ -131,6 +174,11 @@
 
 
 
-    @section Scripts {
-        @Scripts.Render("~/bundles/jqueryval")
-    }
+
+
+
+
+
+
+
+

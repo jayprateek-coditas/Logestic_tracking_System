@@ -29,12 +29,13 @@ namespace Logestic_Tracking.Controllers
         {
             return View();
         }
+       // [AuthorizeAno]
         [HttpPost]
         public ActionResult Login(User user)
         {
             var u = _user.Get().Where(a => a.Email == user.Email && a.Password == user.Password).ToList();
-
-            Session["user_store"] = u[0].Users_ID;
+            FormsAuthentication.SetAuthCookie(user.Email, false);
+            
             if (u.Count() ==0)
             {
                 ViewBag.msg = "Invalid id OR Password !!";
@@ -45,7 +46,8 @@ namespace Logestic_Tracking.Controllers
                 ViewData["msg"] = "You Are not Verified till Now !!";
                 return View();
             }
-
+            Session["user_store"] = u[0].Users_ID;
+            Session["Role"] = u[0].Role_ID;
             Session["email"] = u[0].Email;
             if (u[0].Role_ID==11)
             {
@@ -59,7 +61,6 @@ namespace Logestic_Tracking.Controllers
             }
            // Session["user_store"] = u[0].Users_ID;
              return RedirectToAction("PlaceOrder", "Orders");
-            
         }
 
         public ActionResult SignUp()
@@ -84,11 +85,9 @@ namespace Logestic_Tracking.Controllers
         {
             Session.Abandon();
             FormsAuthentication.SignOut();
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Login", "User");
         }
 
             
-        
-       
     }
 }

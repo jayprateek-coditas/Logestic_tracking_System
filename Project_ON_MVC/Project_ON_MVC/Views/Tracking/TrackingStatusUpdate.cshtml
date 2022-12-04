@@ -1,0 +1,108 @@
+﻿@model IEnumerable<Project_ON_MVC.Models.Tracking>
+
+
+
+
+@*<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Order_ID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tracking_Number)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Company_ID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Order_Status)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Order_ID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Tracking_Number)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Company_ID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Order_Status)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+</table>*@
+
+<style>
+    .container-1 {
+        display: grid;
+        grid-template-columns: 260px 180px 90px 180px;
+        grid-template-rows: auto auto auto auto auto auto;
+        column-gap: 70px;
+        margin-left: 17%;
+        margin-right: 14%;
+        padding-left: 8%;
+        border-block-color:blueviolet;
+        background-color: khaki;
+    }
+    .details {
+        grid-column: 1/2;
+        grid-row: 1/1;
+    }
+    .Update {
+        grid-column: 2/3;
+        grid-row: 1/1;
+        margin-top:25px;
+    }
+    .select_1 {
+        margin-top: 25px;
+        grid-column: 3/4;
+        grid-row: 1/1;
+        magin-right:15px;
+    }
+    
+</style>
+
+<body style="background-image: url('/Images/logestic_comp.jpg'); background-size: cover;">
+
+    @foreach (var item in Model)
+    {
+        <div class="container-1">
+            <div class="details">
+               
+                <hr />
+                <h5><b>Tracking Number :</b>@Html.DisplayFor(modelItem => item.Tracking_Number)</h5>
+                <h5><b>Order Placed Time :</b>@Html.DisplayFor(modelItem => item.Order_Details.Order_Time)</h5>        
+                <h5><b>Destination Status : @Html.DisplayFor(modelItem => item.Order_Details.Dest_Description)</b></h5>
+            </div>
+            <div class="Update">
+                
+                <br />
+                <h5><b>@Html.DisplayFor(modelItem => item.Order_Status)</b></h5>
+                @*@Html.DropDownListFor(modelItem => item.Order_Status, new SelectList(ViewBag.order_stages), " ---- Update Status ---- ", new { @class = "chzn-select", @style = "width:160px; height:25px;font-size:15px;", @required = "required" })*@
+            </div>
+            <div class="select_1">
+                <h3>
+                    @Html.ActionLink("Update", "Tracking_Update", new {id=(int)item.Tracking_Number}, new { @class = "btn btn-primary" })
+                </h3>
+            </div>
+        </div>
+            }
+        
+
+
+    </body>
+

@@ -4,72 +4,101 @@
     ViewData["Title"] = "Search";
 }
 
+<body class="search-div">
 
-
-<form asp-controller="Company" asp-action="Search" method="post">
-    <div class="form-out">
-        <div class="search">
-            <input type="text" name="str" class="searchTerm" value="" placeholder="Search By Tracking ID">
-            <button type="submit" class="searchButton">
-                Search
-            </button>
+    <form asp-controller="Company" asp-action="Search" method="post">
+        <div class="form-out">
+            <div class="search">
+                <input type="number" name="str" class="searchTerm" value="" placeholder="Search By Tracking ID" min="111111" max="999999">
+                <input type="Submit" class="searchButton1" value="Submit">
+            </div>
         </div>
+
+    </form>
+
+    <div class="t_1">
+        @if (Model.Count() > 0)
+        {
+
+
+
+            foreach (var item in Model)
+            {
+                <div class="body_1">
+                    <div class="container-1">
+                        <article class="card" style="margin-left:10px">
+                            <header class="card-header"> My Orders / Tracking </header>
+                            <div class="card-body" style="margin-left:10px">
+                                <article class="card">
+                                    <div class="card-body row" style="margin-left:10px">
+                                        <div class="col"> <strong>Order Placed Time:</strong> @Html.DisplayFor(modelItem => item.Order_Details.Order_Time)<br> </div>
+                                        <div class="col"> <strong>Company Name:</strong>  @Html.DisplayFor(modelItem => item.Company.Company_Name), | <i class="fa fa-phone"></i>@Html.DisplayFor(modelItem => item.Company.Contact_Number) <br> </div>
+                                        <div class="col"> <strong>Status:</strong> <br>@Html.DisplayFor(modelItem => item.Order_Status) </div>
+                                        <div class="col"> <strong>Tracking #:</strong> <br> @Html.DisplayFor(modelItem => item.Tracking_Number) </div>
+                                        <div class="col"> <strong>Destination Address #:</strong> <br> @Html.DisplayFor(modelItem => item.Order_Details.Order_Destination) </div>
+                                    </div>
+                                </article>
+                                @if (item.Order_Status == "Order in Process")
+                                {<div class="track">
+                                        <div class="step active"> <span class="icon"> <i class="fa fa-check"></i> </span> <span class="text">Order in Process</span> </div>
+                                        <div class="step "> <span class="icon"> <i class="fa fa-user"></i> </span> <span class="text"> Order is Picked</span> </div>
+                                        <div class="step "> <span class="icon"> <i class="fa fa-truck"></i> </span> <span class="text"> "Order out for Delivary" </span> </div>
+                                        <div class="step"> <span class="icon"> <i class="fa fa-box"></i> </span> <span class="text">"Order Successfully Delivary"</span> </div>
+                                    </div>
+                                    <hr>
+                                    //"Order Shipped", "Order out for Delivary", "Order Successfully Delivary"
+                                }
+                                else if (item.Order_Status == "Order is Picked")
+                                {
+                                    <div class="track">
+                                        <div class="step active"> <span class="icon"> <i class="fa fa-check"></i> </span> <span class="text">Order in Process</span> </div>
+                                        <div class="step active"> <span class="icon"> <i class="fa fa-user"></i> </span> <span class="text"> Order is Picked</span> </div>
+                                        <div class="step "> <span class="icon"> <i class="fa fa-truck"></i> </span> <span class="text"> Order Shipped </span> </div>
+                                        <div class="step "> <span class="icon"> <i class="fa fa-truck"></i> </span> <span class="text"> Order out for Delivary </span> </div>
+                                        <div class="step"> <span class="icon"> <i class="fa fa-box"></i> </span> <span class="text">Order Successfully Delivary</span> </div>
+                                    </div>
+                                    <hr>
+                                }
+                                else if (item.Order_Status == "Order Shipped")
+                                {
+                                    <div class="track">
+                                        <div class="step active"> <span class="icon"> <i class="fa fa-check"></i> </span> <span class="text">Order in Process</span> </div>
+                                        <div class="step active"> <span class="icon"> <i class="fa fa-user"></i> </span> <span class="text"> Order is Picked</span> </div>
+                                        <div class="step active"> <span class="icon"> <i class="fa fa-truck"></i> </span> <span class="text"> Order Shipped </span> </div>
+                                        <div class="step "> <span class="icon"> <i class="fa fa-truck"></i> </span> <span class="text"> Order out for Delivary </span> </div>
+                                        <div class="step"> <span class="icon"> <i class="fa fa-box"></i> </span> <span class="text">Order Successfully Delivary</span> </div>
+                                    </div>
+                                    <hr>
+                                }
+                                else if (item.Order_Status == "Order out for Delivary")
+                                {
+                                    <div class="track">
+                                        <div class="step active"> <span class="icon"> <i class="fa fa-check"></i> </span> <span class="text">Order in Process</span> </div>
+                                        <div class="step active"> <span class="icon"> <i class="fa fa-user"></i> </span> <span class="text"> Order is Picked</span> </div>
+                                        <div class="step active"> <span class="icon"> <i class="fa fa-truck"></i> </span> <span class="text"> Order Shipped </span> </div>
+                                        <div class="step active"> <span class="icon"> <i class="fa fa-truck"></i> </span> <span class="text"> Order out for Delivary </span> </div>
+                                        <div class="step"> <span class="icon"> <i class="fa fa-box"></i> </span> <span class="text">Order Successfully Delivary</span> </div>
+                                    </div>
+                                    <hr>
+                                }
+                                else if (item.Order_Status == "Order Successfully Delivary")
+                                {
+                                    <div class="track">
+                                        <div class="step active"> <span class="icon"> <i class="fa fa-check"></i> </span> <span class="text">Order in Process</span> </div>
+                                        <div class="step active"> <span class="icon"> <i class="fa fa-user"></i> </span> <span class="text"> Order is Picked</span> </div>
+                                        <div class="step active"> <span class="icon"> <i class="fa fa-truck"></i> </span> <span class="text"> Order Shipped </span> </div>
+                                        <div class="step active"> <span class="icon"> <i class="fa fa-truck"></i> </span> <span class="text"> Order out for Delivary </span> </div>
+                                        <div class="step active"> <span class="icon"> <i class="fa fa-box"></i> </span> <span class="text">Order Successfully Delivary</span> </div>
+                                    </div>
+                                    <hr>
+                                }
+
+
+                        </article>
+                    </div>
+                </div>
+            }
+        }
     </div>
 
-</form>
-<div class="t_1">
-    @if (Model.Count() > 0)
-    {
-
-        <table class="table .thead-dark">
-            <thead>
-                <tr>
-                    <th>
-                        Tracking Number : 
-                    
-                    </th>
-                    <th>
-                        Company ID :
-                    
-                    </th>
-                    <th>
-                        Order ID :
-                    
-                    </th>
-                    <th>
-                        Order Status : 
-                    
-                    </th>
-                    <th>
-                        <b> Update Status </b>
-                    </th>
-                    
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        <td>
-                            &nbsp; @Html.DisplayFor(modelItem => item.Tracking_Number)
-                        </td>
-                        <td>
-                            &nbsp;@Html.DisplayFor(modelItem => item.Company_ID)
-                        </td>
-                        <td>
-                            &nbsp;@Html.DisplayFor(modelItem => item.Order_ID)
-                        </td>
-                        <td>
-                            &nbsp;@Html.DisplayFor(modelItem => item.Order_Status)
-                        </td>
-                        <td>
-                            <button type="button" class="btn btn-success">  @Html.ActionLink("Update", "Tracking_Update", "Tracking", new { id = item.Tracking_Number}, new { area = "" })</button>
-                        </td>
-                    </tr>
-                }
-            </tbody>
-
-        </table>
-
-    }
-</div>
+</body>

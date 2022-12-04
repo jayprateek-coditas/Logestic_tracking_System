@@ -8,70 +8,246 @@
 @using (Html.BeginForm("Register_", "Company", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
-    
-<div class="form-horizontal">
-    <h4>Register_Company</h4>
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-    <div class="alert-danger">
-        @if (@ViewData["company_msg"]!=null)
-        {
-        <h3>@ViewData["company_msg"];</h3>
-        }
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(model => model.user.Email, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.user.Email, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.user.Email, "", new { @class = "text-danger" })
+    @*<div class="form-horizontal">
+            <h4>Register_Company</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="alert-danger">
+                @if (@ViewData["company_msg"]!=null)
+                {
+                <h3>@ViewData["company_msg"];</h3>
+                }
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.user.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.user.Email, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.user.Email, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.user.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.user.Password, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.user.Password, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.company.Company_Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.company.Company_Name, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.company.Company_Name, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.company.Contact_Number, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.company.Contact_Number, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.company.Contact_Number, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.company.Address, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.company.Address, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.company.Address, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Register" class="btn btn-default" />
+                </div>
+            </div>
+        </div>*@
+
+
+
+
+<body style="background-image: url('/Images/place order.jpg'); background-size: cover;">
+
+    <div class="login-page">
+        <div class="form">
+            <div class="login">
+                <div class="login-header">
+
+                </div>
+            </div>
+            <div class="wrapper">
+                @*  <form name="form" class="login-form" id="form" action="~/User/Login" method="post">*@
+
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+                @if (@ViewBag.msg != null)
+                {
+                    <div style="border: 1px solid red">
+                        @ViewBag.msg
+                    </div>
+                }
+                <h1><b>Company Registration</b></h1>
+                <div class="input-control">
+                    @Html.EditorFor(model => model.user.Email, new { htmlAttributes = new { @class = "login__input", @placeholder = "Email" } })
+                    @*<input type="email" class="login__input" id="Email" placeholder="Email" required="required" name="Email">*@
+                    <div class="error"></div>
+                </div>
+                <div class="input-control">
+                    @Html.EditorFor(model => model.user.Password, new { htmlAttributes = new { type = "password", @class = "login__input", @placeholder = "Password" } })
+                    @*  <input type="password" class="login__input" id="Password" placeholder="Password" required="required" name="Password">*@
+                    <div class="error"></div>
+                </div>
+                <div class="input-control">
+                    @Html.EditorFor(model => model.company.Company_Name, new { htmlAttributes = new { @class = "login__input", @placeholder = "Company Name" } })
+                    <div class="error"></div>
+                </div>
+                <div class="input-control">
+                    @Html.EditorFor(model => model.company.Address, new { htmlAttributes = new { @class = "login__input", @placeholder = "Address" } })
+
+                    <div class="error"></div>
+                </div>
+                <div class="input-control">
+                    @Html.EditorFor(model => model.company.Contact_Number, new { htmlAttributes = new { @class = "login__input", @placeholder = "Contact Number " } })
+
+                    <div class="error"></div>
+                </div>
+
+                <button class="button_1 btn-primary" type="submit">SIGN UP</button>
+                <p class="message">
+                    <b> Already Have an Account? </b>
+                    <div>
+                        @Html.ActionLink("Login", "Login", "User")
+                        <span>&nbsp;</span>
+
+                    </div>
+                    @* </form>*@
+            </div>
         </div>
     </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.user.Password, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.user.Password, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.user.Password, "", new { @class = "text-danger" })
+
+
+
+
+
+    </body>
+
+
+
+
+
+
+
+
+    <!--<head>
+        <meta charset="utf-8">
+        <title>Form-v4 by Colorlib</title>-->
+    <!-- Mobile Specific Metas -->
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">-->
+    <!-- Font-->
+    <!--<link rel="stylesheet" type="text/css" href="css/opensans-font.css">
+    <link rel="stylesheet" type="text/css" href="fonts/line-awesome/css/line-awesome.min.css">-->
+    <!-- Jquery -->
+    <!--<link rel="stylesheet" href="https://jqueryvalidation.org/files/demo/site-demos.css">-->
+    <!-- Main Style Css -->
+    <!--<link rel="stylesheet" href="css/style.css" />
+    </head>
+    <body class="form-v4">
+        <div class="page-content" style="margin-top: 0%;">
+            <div class="form-v4-content" style="margin-top: 0%;">
+                <div class="form-left" style="margin-top: 0%;">
+                    <h2>INFOMATION</h2>
+                    <p class="text-1">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Et molestie ac feugiat sed. Diam volutpat commodo.</p>
+                    <p class="text-2"><span>Eu ultrices:</span> Vitae auctor eu augue ut. Malesuada nunc vel risus commodo viverra. Praesent elementum facilisis leo vel.</p>
+                    <div class="form-left-last">
+                        <input type="submit" name="account" class="account" value="Have An Account">
+                    </div>
+                </div>
+                <form class="form-detail" action="#" method="post" id="myform">
+                    <h2>COMPANY REGISTER FORM</h2>
+                    <div class="form-group">
+                        <div class="form-row form-row-1">
+                            <label for="first_name">Company Name </label>
+                            <input type="text" name="Company_Name" id="first_name" class="input-text">
+                            <input type="text" name="Company_Name" id="first_name" class="input-text">
+                        </div>
+
+
+                    </div>
+                    <div class="form-row">
+                        <label for="your_email">Your Email</label>
+                        <input type="text" name="Email" id="your_email" class="input-text" required pattern="[^]+[^]+.[a-zA-Z]{2,6}">
+                    </div>
+                    <div class="form-group">
+                        <div class="form-row form-row-1 ">
+                            <label for="password">Password</label>
+                            <input type="password" name="Password" id="password" class="input-text" required>
+                        </div>
+                        <div class="form-row form-row-1">
+
+                            <label for="Contactnumber">Contact Number</label>
+                            <input type="text" name="Contact_Number" id="comfirm_password" class="input-text" required>
+                        </div>
+                        <div class="form-row form-row-1">
+
+                            <label for="Address">Address</label>
+                            <textarea id="w3review" name="Address" rows="4" cols="50">Address</textarea>
+                        </div>
+
+                    </div>
+                    <div class="form-checkbox">
+                        <label class="container">
+                            <p>I agree to the <a href="#" class="text">Terms and Conditions</a></p>
+                            <input type="checkbox" name="checkbox">
+                            <span class="checkmark"></span>
+                        </label>
+                    </div>
+                    <div class="form-row-last">
+                        <input type="submit" name="register" class="register" value="Register">
+                    </div>
+                </form>
+            </div>
         </div>
-    </div>
+        <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
+        <script>
+            // just for the demos, avoids form submit
+            jQuery.validator.setDefaults({
+                debug: true,
+                success: function (label) {
+                    label.attr('id', 'valid');
+                },
+            });
+            $("#myform").validate({
+                rules: {
+                    password: "required",
+                    comfirm_password: {
+                        equalTo: "#password"
+                    }
+                },
+                messages: {
+                    first_name: {
+                        required: "Please enter a firstname"
+                    },
+                    last_name: {
+                        required: "Please enter a lastname"
+                    },
+                    your_email: {
+                        required: "Please provide an email"
+                    },
+                    password: {
+                        required: "Please enter a password"
+                    }
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.company.Company_Name, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.company.Company_Name, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.company.Company_Name, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.company.Contact_Number, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.company.Contact_Number, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.company.Contact_Number, "", new { @class = "text-danger" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(model => model.company.Address, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.company.Address, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.company.Address, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Register" class="btn btn-default" />
-        </div>
-    </div>
-</div>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+                }
+            });
+        </script>
+    </body>-->
+    <!-- This templates was made by Colorlib (https://colorlib.com) -->
+    }
+    }
