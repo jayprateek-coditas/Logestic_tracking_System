@@ -1,29 +1,38 @@
 ﻿@model IEnumerable<Project_ON_MVC.Models.User>
 
 
+<style>
+    th{
+        padding:10px;
+        font-size:medium;
+         background-color:darksalmon;
+         text-align:center;
+    }
+</style>
+
 <body class="admin-div">
 
     <div class="bg-image h-100" style="background-color: #8ebcdb; margin-top:5%">
-        <table class="table .thead-dark">
+        <table class="table table-bordered .thead-light" style="background-color:lightgray;text-align:center">
             <tr>
                 <th>
                     <b>USER ID </b>
-                    @Html.DisplayNameFor(model => model.Users_ID)
+
                 </th>
                 <th>
                     <b>EMAIL ID </b>
-                    @Html.DisplayNameFor(model => model.Email)
+
                 </th>
                 <th>
-                    <b>PASSWORD ID </b>
-                    @Html.DisplayNameFor(model => model.Password)
+                    <b>PASSWORD  </b>
+
                 </th>
                 <th>
                     <b>ROLE  </b>
 
                 </th>
-               
-                <th></th>
+
+
             </tr>
 
             @foreach (var item in Model)
@@ -41,10 +50,8 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.Role.Role_Name)
                     </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.user_status)
-                    </td>
-                   
+
+
                 </tr>
             }
 

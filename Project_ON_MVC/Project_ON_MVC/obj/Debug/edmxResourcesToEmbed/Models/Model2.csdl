@@ -226,6 +226,9 @@
       <End Role="Shipment" EntitySet="Shipments" />
       <End Role="Order_Details" EntitySet="Order_Details" />
     </AssociationSet>
+    <FunctionImport Name="GET_ALL_COMPANY" ReturnType="Collection(MY_ProjectModel.GET_ALL_COMPANY_Result)" />
+    <FunctionImport Name="GET_ALL_ORDERS" ReturnType="Collection(MY_ProjectModel.GET_ALL_ORDERS_Result)" />
+    <FunctionImport Name="GET_ALL_USERS" ReturnType="Collection(MY_ProjectModel.GET_ALL_USERS_Result)" />
   </EntityContainer>
   <Association Name="FK__Order_Det__Ship___5070F446">
     <End Type="MY_ProjectModel.Shipment" Role="Shipment" Multiplicity="0..1" />
@@ -239,4 +242,32 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <ComplexType Name="GET_ALL_COMPANY_Result">
+    <Property Type="Int32" Name="Company_ID" Nullable="false" />
+    <Property Type="String" Name="Company_Name" Nullable="false" MaxLength="35" />
+    <Property Type="String" Name="Address" Nullable="false" MaxLength="Max" />
+    <Property Type="String" Name="Contact_Number" Nullable="false" MaxLength="10" />
+    <Property Type="Int32" Name="User_ids" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="GET_ALL_ORDERS_Result">
+    <Property Type="Int32" Name="Order_ID" Nullable="false" />
+    <Property Type="Int32" Name="Order_Valuation" Nullable="true" />
+    <Property Type="Int32" Name="Quantity" Nullable="true" />
+    <Property Type="Double" Name="OrderWeight" Nullable="true" />
+    <Property Type="String" Name="Order_Source" Nullable="true" MaxLength="30" />
+    <Property Type="String" Name="Order_Destination" Nullable="true" MaxLength="30" />
+    <Property Type="String" Name="Source_Description" Nullable="true" MaxLength="180" />
+    <Property Type="String" Name="Dest_Description" Nullable="true" MaxLength="180" />
+    <Property Type="Double" Name="Total_Price" Nullable="true" />
+    <Property Type="DateTime" Name="Order_Time" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="User_ids" Nullable="true" />
+    <Property Type="Int32" Name="Ship_ID" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="GET_ALL_USERS_Result">
+    <Property Type="Int32" Name="Users_ID" Nullable="false" />
+    <Property Type="String" Name="Email" Nullable="true" MaxLength="25" />
+    <Property Type="String" Name="Password" Nullable="true" MaxLength="30" />
+    <Property Type="Int32" Name="Role_ID" Nullable="true" />
+    <Property Type="String" Name="user_status" Nullable="true" MaxLength="2" />
+  </ComplexType>
 </Schema>

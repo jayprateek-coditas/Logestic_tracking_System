@@ -35,10 +35,10 @@ namespace Project_ON_MVC.Controllers
         {
             if (Session["user_store"] != null)
             {
-                var source = (from source_1 in shipmentContext.Get().ToList() select source_1.Source).Distinct().ToList();
-                ViewBag.source_1 = source;
-                var destination = (from source_1 in shipmentContext.Get().ToList() select source_1.Destination).Distinct().ToList();
-                ViewBag.dest_1 = destination;
+                var source = (from source_data in shipmentContext.Get().ToList() select source_data.Source).Distinct().ToList();
+                ViewBag.source_data = source;
+                var destination = (from source_data in shipmentContext.Get().ToList() select source_data.Destination).Distinct().ToList();
+                ViewBag.dest_data = destination;
                 return View();
             }
             else
@@ -47,12 +47,17 @@ namespace Project_ON_MVC.Controllers
         [HttpPost]
         public ActionResult PlaceOrder(Order_Details order)
         {
-            List<string> s1 = new List<string>();
-            s1.Add(order.Order_Source);
-            s1.Add(order.Order_Destination);
-            TempData["order"] = s1;
-            TempData["order_data"] = order;
-            return RedirectToAction("Display_Route", "Shipment");
+            if (ModelState.IsValid)
+            {
+                List<string> store = new List<string>();
+                store.Add(order.Order_Source);
+                store.Add(order.Order_Destination);
+                TempData["order"] = store;
+                TempData["order_data"] = order;
+                return RedirectToAction("Display_Route", "Shipment");
+            }
+            ViewBag.PlaceOrderError = "Please Enter Valid Address";
+            return RedirectToAction("PlaceOrder");
             // return View(order);
         }
 
@@ -90,8 +95,8 @@ namespace Project_ON_MVC.Controllers
             {
                 Payment pay = paymentContext.Get_ID(pay_id);
 
-                List<string> pay_type = new List<string> { "UPI", "Net Banking ", "Credit Card ", "Paytm", "PhonePay" };
-                TempData["list"] = pay_type;
+                //List<string> pay_type = new List<string> { "UPI", "Net Banking ", "Credit Card ", "Paytm", "PhonePay" };
+               // TempData["list"] = pay_type;
                 ViewBag.Pay = pay;
                 TempData["payment_invoice"] = pay.Invoice_No;
                 return View(pay);

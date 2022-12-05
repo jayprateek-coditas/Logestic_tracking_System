@@ -24,79 +24,33 @@ namespace Project_ON_MVC.Services
         }
         public void add(Tracking track)
         {
-            try
-            {
                 _context.Trackings.Add(track);
                 _context.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
         }
         public Tracking Find_by_OrderID(int id)
         {
-            try
-            {
                 var comp = (from track in _context.Trackings.ToList() where track.Order_ID == id select track).ToList();
                 return comp[0];
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
         }
         public Tracking Get_by_TrackID(int id)
         {
-            try
-            {
+            
                 var record = _context.Trackings.Find(id);
-                if (record == null)
-                    throw new Exception($"The Record with Category Id {id} is Missing");
+                
                 return record;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
         }
 
         public void  Update_Status(int id,string str="")
         {
-            try
-            {
                 var record = _context.Trackings.Find(id);
-                  
-                if (record == null)
-                    throw new Exception($"The Record with Category Id {id} is Missing");
                 record.Order_Status = str;
-
-                //                record = entity;
-
-
                 _context.SaveChanges();
-                
-            }
-            catch (Exception ex)
-            {
-
-                throw ex;
-            }
         }
-        public void Delete(int id)
+        public void Delete_BY_ID(int id)
         {
-            try
-            {
                 var record = _context.Trackings.Find(id);
-                if (record == null)
-                    throw new Exception($"The Record with Category Id {id} is Missing");
                 _context.Trackings.Remove(record);
                 _context.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
         }
     }
 }

@@ -9,7 +9,7 @@ using Project_ON_MVC.Models;
 using Project_ON_MVC.Services;
 namespace Project_ON_MVC.Controllers
 {
-    //[Authorize(Roles ="Company")]
+    
     public class CompanyController : Controller
     {
         CompanyContext companyContext;
@@ -35,16 +35,31 @@ namespace Project_ON_MVC.Controllers
         {
             register.user.Role_ID = 13;
             register.user.user_status = "-1";
+
+            var user_data = (from user in userContext.Get() where user.Email == register.user.Email select user).ToList();
+            var company_data = (from company in companyContext.Get() where company.Company_Name.ToLower().Trim() == register.company.Company_Name.ToLower().Trim() select company).ToList();
+
+            if(user_data.Count()>0)
+            {
+                ViewBag.CompanyRegisterError = "Email ID Already Exists !! ";
+                return RedirectToAction("Register_","Company");
+            }
+            if(company_data.Count()>0)
+            {
+                ViewBag.CompanyRegisterError = "COMPANY NAME  ALREADY EXISTS !! ";
+                return RedirectToAction("Register_", "Company");
+            }
+
             if (ModelState.IsValid)
             {
                 userContext.add(register.user);
                 ModelState.Clear();
             }
-            var id = (from users in userContext.Get() where users.Email == register.user.Email && users.Password == register.user.Password select new { users.Users_ID }).ToList();
-            if (id.Count == 1)
+            var get_user_id = from users in userContext.Get() where users.Email == register.user.Email && users.Password == register.user.Password select users.Users_ID;
+            if (get_user_id!=null)
             {
-                register.company.User_ids = id[0].Users_ID;
-                register.company.User = null;
+                register.company.User_ids = get_user_id.ToList()[0];
+                //register.company.User = null;
                 if (ModelState.IsValid)
                 {
                     companyContext.add(register.company);
@@ -54,10 +69,11 @@ namespace Project_ON_MVC.Controllers
             }
             else
             {
-                ViewData["Company_Msg"] = "Email ID or Password already registered ";
+                ViewBag.CompanyRegisterError = "Email ID  already registered ";
+                return RedirectToAction("Register_", "Company");
             }
 
-            return RedirectToAction("Login", "User");
+            
         }
         public ActionResult DisplayCompany()
         {
@@ -80,33 +96,38 @@ namespace Project_ON_MVC.Controllers
 
         public ActionResult DisplayCompany_Panding_Orders()
         {
-            var Company_ids = companyContext.Get().Where(s => s.User_ids == (int)Session["user_store"]).ToList()[0].Company_ID;
-            var Company_panding_orders = trackContext.Get().Where(c => c.Company_ID == Company_ids && c.Order_Status.Contains("Success") == false);
+            var Company_ids = companyContext.Get().Where(store => store.User_ids == (int)Session["user_store"]).ToList()[0].Company_ID;
+            var Company_panding_orders = trackContext.Get().Where(value => value.Company_ID == Company_ids && value.Order_Status.Contains("Success") == false);
             return View(Company_panding_orders);
         }
 
 
-       
+        
         public ActionResult Search()
         {
-            List <Tracking>l1= new List<Tracking>();
-            return View(l1);
+            List <Tracking>list= new List<Tracking>();
+            return View(list);
         
         }
         
         [HttpPost]
         public ActionResult Search(string str)
         {
-            string str_value = "";
-             foreach(var it in str)
+            if (str.Count()>0)
             {
-                if (it >= '0' && it <= '9')
-                    str_value += it;
-            }
-            var value = Convert.ToInt64(str_value);
-            var data = trackContext.Get().Where(t => t.Tracking_Number == value).ToList();
+                string str_value = "";
+                foreach (var iteration in str)
+                {
+                    if (iteration >= '0' && iteration <= '9')
+                        str_value += iteration;
+                }
+                var value = Convert.ToInt64(str_value);
+                var data = trackContext.Get().Where(store => store.Tracking_Number == value).ToList();
 
-            return View(data);
+                return View(data);
+            }
+
+            return RedirectToAction("Search", "Company");
         }
 
 

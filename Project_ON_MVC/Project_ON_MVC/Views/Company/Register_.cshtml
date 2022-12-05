@@ -84,34 +84,34 @@
 
                 @Html.AntiForgeryToken()
                 @Html.ValidationSummary(true)
-                @if (@ViewBag.msg != null)
+                @if (@ViewBag.CompanyRegisterError != null)
                 {
                     <div style="border: 1px solid red">
-                        @ViewBag.msg
+                     <b>@ViewBag.CompanyRegisterError</b>
                     </div>
                 }
                 <h1><b>Company Registration</b></h1>
                 <div class="input-control">
-                    @Html.EditorFor(model => model.user.Email, new { htmlAttributes = new { @class = "login__input", @placeholder = "Email" } })
+                    @Html.EditorFor(model => model.user.Email, new { htmlAttributes = new { @class = "login__input", @placeholder = "Email" ,@type="email", @data_val = "true", @required = "required" } })
                     @*<input type="email" class="login__input" id="Email" placeholder="Email" required="required" name="Email">*@
                     <div class="error"></div>
                 </div>
                 <div class="input-control">
-                    @Html.EditorFor(model => model.user.Password, new { htmlAttributes = new { type = "password", @class = "login__input", @placeholder = "Password" } })
+                    @Html.EditorFor(model => model.user.Password, new { htmlAttributes = new { @class = "login__input", type = "password", @placeholder = "Password", @min = "6", @max = "16", @data_val = "true", @required = "required" } })
                     @*  <input type="password" class="login__input" id="Password" placeholder="Password" required="required" name="Password">*@
                     <div class="error"></div>
                 </div>
                 <div class="input-control">
-                    @Html.EditorFor(model => model.company.Company_Name, new { htmlAttributes = new { @class = "login__input", @placeholder = "Company Name" } })
+                    @Html.EditorFor(model => model.company.Company_Name, new { htmlAttributes = new { @class = "login__input", @placeholder = "Company Name", @data_val = "true", @required = "required" } })
                     <div class="error"></div>
                 </div>
                 <div class="input-control">
-                    @Html.EditorFor(model => model.company.Address, new { htmlAttributes = new { @class = "login__input", @placeholder = "Address" } })
+                    @Html.EditorFor(model => model.company.Address, new { htmlAttributes = new { @class = "login__input", @placeholder = "Address", @data_val = "true", @required = "required" } })
 
                     <div class="error"></div>
                 </div>
                 <div class="input-control">
-                    @Html.EditorFor(model => model.company.Contact_Number, new { htmlAttributes = new { @class = "login__input", @placeholder = "Contact Number " } })
+                    @Html.EditorFor(model => model.company.Contact_Number, new { htmlAttributes = new { @class = "login__input", @placeholder = "Contact Number ",@type="number",@min="1111111111",@max="9999999999", @data_val = "true", @required = "required" } })
 
                     <div class="error"></div>
                 </div>

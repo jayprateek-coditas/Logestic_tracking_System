@@ -11,7 +11,7 @@ namespace Project_ON_MVC.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
     public partial class User
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -20,9 +20,15 @@ namespace Project_ON_MVC.Models
             this.Companies = new HashSet<Company>();
             this.Order_Details = new HashSet<Order_Details>();
         }
-    
         public int Users_ID { get; set; }
+
+        
+        [Required(ErrorMessage = "Email is required.")]
+        [RegularExpression(@"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}", ErrorMessage = "Check email address format!")]
+        [MinLength(12, ErrorMessage = "Min 12 character Required")]
         public string Email { get; set; }
+        [Required(ErrorMessage = "Password is required.")]
+        [MinLength(6, ErrorMessage = "Min 6 character Required")]
         public string Password { get; set; }
         public Nullable<int> Role_ID { get; set; }
         public string user_status { get; set; }

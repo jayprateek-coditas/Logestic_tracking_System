@@ -24,26 +24,26 @@ namespace Project_ON_MVC.Controllers
 
         public ActionResult Add()
         {
-            Tracking t1 = new Tracking();
+            Tracking tracking = new Tracking();
             var l1 = (List<int>)TempData["track_data"];
-            t1.Order_ID = l1.ElementAt(0);
-            t1.Company_ID = l1.ElementAt(1);
-            t1.Order_Status = "Order in Process";
-            trackingContext.add(t1);
+            tracking.Order_ID = l1.ElementAt(0);
+            tracking.Company_ID = l1.ElementAt(1);
+            tracking.Order_Status = "Order in Process";
+            trackingContext.add(tracking);
             return RedirectToAction("ShowPlacedOrder", "Orders");
         }
 
         public ActionResult TrackingStatusUpdate()
         {
             var id = (from user in userContext.Get() join company in companyContext.Get() on user.Users_ID equals company.User_ids where user.Users_ID == (int)Session["user_store"] select company).ToList();
-            var t1 = trackingContext.Get().Where(company_id => company_id.Company_ID == id[0].Company_ID && !(company_id.Order_Status).Contains("Success"));
-            if (t1.Count() == 0)
+            var tracking = trackingContext.Get().Where(company_id => company_id.Company_ID == id[0].Company_ID && !(company_id.Order_Status).Contains("Success"));
+            if (tracking.Count() == 0)
             {
                 ViewBag.CompanyOrdermsg = "Sorry You Are not Having any Pending Orders ";
                 return View();
             }
             
-            return View(t1);
+            return View(tracking);
 
         }
 
@@ -67,10 +67,10 @@ namespace Project_ON_MVC.Controllers
         public ActionResult TrackingStatus(int id)
 
         {
-            var t1 = trackingContext.Get_by_TrackID((int)id);
+            var track = trackingContext.Get_by_TrackID((int)id);
             
            
-            return View(t1);
+            return View(track);
         }
 
     }

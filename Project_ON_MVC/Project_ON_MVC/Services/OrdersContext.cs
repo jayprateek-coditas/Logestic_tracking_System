@@ -36,36 +36,28 @@ namespace Project_ON_MVC.Services
         }
         public int? Order_by_ID(int id)
         {
-            try
-            {
+            
+            
                 var ord = (from orders in _context.Order_Details.ToList() where orders.User_ids == id select orders).ToList();
                 return ord[0].User_ids;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            
         }
         public Order_Details Get_ID(int id)
         {
-            try
-            {
+            
+            
                 var record = _context.Order_Details.Find(id);
                 if (record == null)
                     throw new Exception($"The Record with Category Id {id} is Missing");
                 return record;
 
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            
         }
 
         public Order_Details Update(int id, Order_Details entity)
         {
-            try
-            {
+            
+            
                 var record = _context.Order_Details.Find(id);
                 if (record == null)
                     throw new Exception($"The Record with Category Id {id} is Missing");
@@ -76,27 +68,17 @@ namespace Project_ON_MVC.Services
 
                 _context.SaveChanges();
                 return record;
-            }
-            catch (Exception ex)
-            {
-
-                throw ex;
-            }
         }
         public void Delete(int id)
         {
-            try
-            {
+            
+            
                 var record = _context.Order_Details.Find(id);
                 if (record == null)
                     throw new Exception($"The Record with Category Id {id} is Missing");
                 _context.Order_Details.Remove(record);
                 _context.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            
         }
 
         public void Delete_UserID(int id)

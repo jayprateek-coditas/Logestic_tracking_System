@@ -11,7 +11,7 @@ namespace Project_ON_MVC.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
     public partial class Order_Details
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -23,17 +23,23 @@ namespace Project_ON_MVC.Models
     
         public int Order_ID { get; set; }
         public Nullable<int> Order_Valuation { get; set; }
+        
         public Nullable<int> Quantity { get; set; }
+        
         public Nullable<double> OrderWeight { get; set; }
         public string Order_Source { get; set; }
+        [Required]
         public string Order_Destination { get; set; }
+        [Required(ErrorMessage = "Address is Mandatory")]
+        [MinLength(12, ErrorMessage = "Min 12 character Required")]
         public string Source_Description { get; set; }
+        [Required(ErrorMessage = "Address is Mandatory")]
+        [MinLength(12, ErrorMessage = "Min 12 character Required")]
         public string Dest_Description { get; set; }
         public Nullable<double> Total_Price { get; set; }
         public Nullable<System.DateTime> Order_Time { get; set; }
         public Nullable<int> User_ids { get; set; }
         public Nullable<int> Ship_ID { get; set; }
-    
         public virtual User User { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Payment> Payments { get; set; }

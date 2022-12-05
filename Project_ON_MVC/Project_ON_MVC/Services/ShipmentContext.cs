@@ -24,79 +24,32 @@ namespace Project_ON_MVC.Services
         }
         public void add(Shipment ship)
         {
-            try
-            {
                 _context.Shipments.Add(ship);
                 _context.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
         }
-        public Shipment Get_ID(int id)
+        public Shipment Get_ID_Details(int id)
         {
-            try
-            {
                 var record = _context.Shipments.Find(id);
-                if (record == null)
-                    throw new Exception($"The Record with Shipment Id {id} is Missing");
-                return record;
-
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+                  return record;
         }
 
         public Shipment Update(int id, Shipment entity)
         {
-            try
-            {
                 var record = _context.Shipments.Find(id);
-                if (record == null)
-                    throw new Exception($"The Record with Shipment Id {id} is Missing");
-
-
                 record = entity;
-
-
                 _context.SaveChanges();
-                return record;
-            }
-            catch (Exception ex)
-            {
-
-                throw ex;
-            }
+                return record;            
         }
-        public void Delete(int id)
-        {
-            try
-            {
-                var record = _context.Shipments.Find(id);
-                if (record == null)
-                    throw new Exception($"The Record with Shipment Id {id} is Missing");
-
-                _context.Shipments.Remove(record);
-                _context.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
-
-        public void Delete_CompID(int id)
+        
+        public void Delete_Company_BY_ID(int id)
         {
             var record = _context.Shipments.ToList();
 
-            foreach (var it in record)
+            foreach (var iteration in record)
             {
-                if (it.Company_ID == id)
+                if (iteration.Company_ID == id)
                 {
-                    _context.Shipments.Remove(it);
+                    _context.Shipments.Remove(iteration);
                     _context.SaveChanges();
                     return;
                 }

@@ -186,6 +186,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="GET_ALL_COMPANY" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GET_ALL_ORDERS" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GET_ALL_USERS" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="MY_ProjectModelStoreContainer">
           <EntitySet Name="Company" EntityType="Self.Company" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Order_Details" EntityType="Self.Order_Details" Schema="dbo" store:Type="Tables" />
@@ -458,6 +461,9 @@
             <End Role="Shipment" EntitySet="Shipments" />
             <End Role="Order_Details" EntitySet="Order_Details" />
           </AssociationSet>
+          <FunctionImport Name="GET_ALL_COMPANY" ReturnType="Collection(MY_ProjectModel.GET_ALL_COMPANY_Result)" />
+          <FunctionImport Name="GET_ALL_ORDERS" ReturnType="Collection(MY_ProjectModel.GET_ALL_ORDERS_Result)" />
+          <FunctionImport Name="GET_ALL_USERS" ReturnType="Collection(MY_ProjectModel.GET_ALL_USERS_Result)" />
         </EntityContainer>
         <Association Name="FK__Order_Det__Ship___5070F446">
           <End Type="MY_ProjectModel.Shipment" Role="Shipment" Multiplicity="0..1" />
@@ -471,6 +477,34 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="GET_ALL_COMPANY_Result">
+          <Property Type="Int32" Name="Company_ID" Nullable="false" />
+          <Property Type="String" Name="Company_Name" Nullable="false" MaxLength="35" />
+          <Property Type="String" Name="Address" Nullable="false" MaxLength="Max" />
+          <Property Type="String" Name="Contact_Number" Nullable="false" MaxLength="10" />
+          <Property Type="Int32" Name="User_ids" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GET_ALL_ORDERS_Result">
+          <Property Type="Int32" Name="Order_ID" Nullable="false" />
+          <Property Type="Int32" Name="Order_Valuation" Nullable="true" />
+          <Property Type="Int32" Name="Quantity" Nullable="true" />
+          <Property Type="Double" Name="OrderWeight" Nullable="true" />
+          <Property Type="String" Name="Order_Source" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="Order_Destination" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="Source_Description" Nullable="true" MaxLength="180" />
+          <Property Type="String" Name="Dest_Description" Nullable="true" MaxLength="180" />
+          <Property Type="Double" Name="Total_Price" Nullable="true" />
+          <Property Type="DateTime" Name="Order_Time" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="User_ids" Nullable="true" />
+          <Property Type="Int32" Name="Ship_ID" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GET_ALL_USERS_Result">
+          <Property Type="Int32" Name="Users_ID" Nullable="false" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="25" />
+          <Property Type="String" Name="Password" Nullable="true" MaxLength="30" />
+          <Property Type="Int32" Name="Role_ID" Nullable="true" />
+          <Property Type="String" Name="user_status" Nullable="true" MaxLength="2" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -570,6 +604,46 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GET_ALL_COMPANY" FunctionName="MY_ProjectModel.Store.GET_ALL_COMPANY">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MY_ProjectModel.GET_ALL_COMPANY_Result">
+                <ScalarProperty Name="Company_ID" ColumnName="Company_ID" />
+                <ScalarProperty Name="Company_Name" ColumnName="Company_Name" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Contact_Number" ColumnName="Contact_Number" />
+                <ScalarProperty Name="User_ids" ColumnName="User_ids" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GET_ALL_ORDERS" FunctionName="MY_ProjectModel.Store.GET_ALL_ORDERS">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MY_ProjectModel.GET_ALL_ORDERS_Result">
+                <ScalarProperty Name="Order_ID" ColumnName="Order_ID" />
+                <ScalarProperty Name="Order_Valuation" ColumnName="Order_Valuation" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="OrderWeight" ColumnName="OrderWeight" />
+                <ScalarProperty Name="Order_Source" ColumnName="Order_Source" />
+                <ScalarProperty Name="Order_Destination" ColumnName="Order_Destination" />
+                <ScalarProperty Name="Source_Description" ColumnName="Source_Description" />
+                <ScalarProperty Name="Dest_Description" ColumnName="Dest_Description" />
+                <ScalarProperty Name="Total_Price" ColumnName="Total_Price" />
+                <ScalarProperty Name="Order_Time" ColumnName="Order_Time" />
+                <ScalarProperty Name="User_ids" ColumnName="User_ids" />
+                <ScalarProperty Name="Ship_ID" ColumnName="Ship_ID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GET_ALL_USERS" FunctionName="MY_ProjectModel.Store.GET_ALL_USERS">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MY_ProjectModel.GET_ALL_USERS_Result">
+                <ScalarProperty Name="Users_ID" ColumnName="Users_ID" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Role_ID" ColumnName="Role_ID" />
+                <ScalarProperty Name="user_status" ColumnName="user_status" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

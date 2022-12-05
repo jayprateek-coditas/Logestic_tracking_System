@@ -14,46 +14,46 @@ namespace Logestic_Tracking.Controllers
     public class UserController : Controller
     {
         // GET: User
-        UserContext _user;
+        UserContext userContext;
     
         public UserController()
         {
-           _user = new UserContext();
+           userContext = new UserContext();
         }
         public ActionResult Index()
         {
             return View();
         }
-
+        [AllowAnonymous]
         public ActionResult Login()
         {
             return View();
         }
-       // [AuthorizeAno]
+        [AllowAnonymous]
         [HttpPost]
         public ActionResult Login(User user)
         {
-            var u = _user.Get().Where(a => a.Email == user.Email && a.Password == user.Password).ToList();
+            var users = userContext.Get().Where(value => value.Email == user.Email && value.Password == user.Password).ToList();
             FormsAuthentication.SetAuthCookie(user.Email, false);
             
-            if (u.Count() ==0)
+            if (users.Count() ==0)
             {
                 ViewBag.msg = "Invalid id OR Password !!";
                 return View();
             }
-            else if (u[0].user_status!="1")
+            else if (users[0].user_status!="1")
             {
                 ViewData["msg"] = "You Are not Verified till Now !!";
                 return View();
             }
-            Session["user_store"] = u[0].Users_ID;
-            Session["Role"] = u[0].Role_ID;
-            Session["email"] = u[0].Email;
-            if (u[0].Role_ID==11)
+            Session["user_store"] = users[0].Users_ID;
+            Session["Role"] = users[0].Role_ID;
+            Session["email"] = users[0].Email;
+            if (users[0].Role_ID==11)
             {
                 return RedirectToAction("Request_List","Admin");
             }
-            else if (u[0].Role_ID==13)
+            else if (users[0].Role_ID==13)
                      {
               //  Session["user_store"] = u[0].Users_ID;
                 //TempData["comp_store"] = u[0].Users_ID;
@@ -62,7 +62,7 @@ namespace Logestic_Tracking.Controllers
            // Session["user_store"] = u[0].Users_ID;
              return RedirectToAction("PlaceOrder", "Orders");
         }
-
+        [AllowAnonymous]
         public ActionResult SignUp()
         {
             return View();
@@ -70,16 +70,24 @@ namespace Logestic_Tracking.Controllers
             
            // ViewData["roles"] = my_role;
         }
+        [AllowAnonymous]
         [HttpPost]
         public ActionResult SignUp(User user)
         {
             user.Role_ID = 12;
             user.user_status = "1";
+            var usersData = (from users in userContext.Get() where users.Email == user.Email select users).ToList();
+            if(usersData.Count()>0)
+            {
+                ViewBag.RegisterError = "EMAIL ALREADY EXIST ";
+                return View();
+            }
             if(ModelState.IsValid)
             {
-                _user.add(user);
+                userContext.add(user);
+                return RedirectToAction("Login", "User"); ;
             }
-            return View(user);
+            return View();
         }
         public ActionResult LogOut()
         {

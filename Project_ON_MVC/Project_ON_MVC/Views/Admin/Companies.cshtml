@@ -1,7 +1,14 @@
-﻿@model IEnumerable<Project_ON_MVC.Models.Company>
+﻿@model IEnumerable<Project_ON_MVC.Models.GET_ALL_COMPANY_Result>
 
-
-
+<style>
+    th {
+        padding: 15px;
+        font-size: medium;
+        padding-left: 5px;
+        background-color: peachpuff;
+        color: dodgerblue;
+    }
+</style>
 <body class="admin-div">
     @*<table class="table">
             <tr>
@@ -51,36 +58,36 @@
         </table>*@
 
 
-        <div class="bg-image h-100" style="background-color: #8ebcdb; margin-top:5%">
-            <table class="table table-striped .thead-dark" >
-                <thead>
+    <div class="bg-image h-100" style="background-color: #8ebcdb; margin-top:5%">
+        <table class="table table-striped .thead-dark">
+            <thead>
+                <tr>
+                    <th scope="col">COMPANY ID</th>
+                    <th scope="col">COMPANY NAME</th>
+                    <th scope="col">ADDRESS</th>
+                    <th scope="col">CONTACT NUMBER</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
                     <tr>
-                        <th scope="col">Company ID</th>
-                        <th scope="col">Company Name</th>
-                        <th scope="col">Address</th>
-                        <th scope="col">Contact Number</th>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Company_ID)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Company_Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Address)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Contact_Number)
+                        </td>
                     </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model)
-                    {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Company_ID)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Company_Name)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Address)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Contact_Number)
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
+                }
+            </tbody>
+        </table>
+    </div>
 </body>
 

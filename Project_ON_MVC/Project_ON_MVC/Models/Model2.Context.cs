@@ -12,6 +12,8 @@ namespace Project_ON_MVC.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class MY_ProjectEntities1 : DbContext
     {
@@ -33,5 +35,20 @@ namespace Project_ON_MVC.Models
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Tracking> Trackings { get; set; }
+    
+        public virtual ObjectResult<GET_ALL_COMPANY_Result> GET_ALL_COMPANY()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GET_ALL_COMPANY_Result>("GET_ALL_COMPANY");
+        }
+    
+        public virtual ObjectResult<GET_ALL_ORDERS_Result> GET_ALL_ORDERS()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GET_ALL_ORDERS_Result>("GET_ALL_ORDERS");
+        }
+    
+        public virtual ObjectResult<GET_ALL_USERS_Result> GET_ALL_USERS()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GET_ALL_USERS_Result>("GET_ALL_USERS");
+        }
     }
 }

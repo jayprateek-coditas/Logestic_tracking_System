@@ -4,26 +4,26 @@
 
 
 <body class="admin-div">
-    <div style="margin:10px;background-color:palegoldenrod">
-        <h3 style="text-align:center">List of Request</h3>
+    <div style="margin:10px;background-color:gainsboro;">
+        <h3 style="text-align:center;font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif, Arial, sans-serif;margin-top:10px;padding-top:8px;color:steelblue;"><b>VERIFY COMPANY</b></h3>
         <hr />
         <table class="table table-bordered .thead-dark">
-            <thead>
+            <thead style="background-color:cornflowerblue;padding:15px;">
                 <tr>
                     <th>
-                        Company ID
+                        COMPANY ID
                     </th>
                     <th>
-                        Company Name
+                        COMPANY NAME
                     </th>
                     <th>
-                        ContectNumber
+                        CONTACT NUMBER
                     </th>
                     <th>
-                        Address
+                        ADDRESS
                     </th>
                     <th style="text-align:center">
-                        &nbsp;&nbsp; Take Action
+                        &nbsp;&nbsp; TAKE ACTION
                     </th>
 
                 </tr>
@@ -46,10 +46,9 @@
                             @Html.DisplayFor(modelItem => item.company.Address)
                         </td>
                         <td style="text-align:center ;color:white;text-decoration-line:none">
-                            <button type="button" class="btn btn-success"> @Html.ActionLink("Approve", "Approve", new { id = item.company.User_ids })</button>
-
+                             @Html.ActionLink("Approve", "Approve", new { id = item.company.User_ids }, new { @class = "btn btn-success" }))
                             &nbsp;&nbsp;
-                            <button type="button" class="btn btn-danger">  @Html.ActionLink("Delete", "Delete", new { id = item.user.Users_ID })</button>
+                             @Html.ActionLink("Delete", "Delete", new { id = item.user.Users_ID }, new { @class = "btn btn-danger" }))
                         </td>
                     </tr>
                 }

@@ -24,48 +24,35 @@ namespace Project_ON_MVC.Services
         }
         public void add(Payment pay)
         {
-            try
-            {
+            
+            
                 _context.Payments.Add(pay);
                 _context.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            
         }
         public int Order_by_ID(int id)
         {
-            try
-            {
+            
+            
                 var comp = (from comps in _context.Companies.ToList() where comps.User_ids == id select comps).ToList();
                 return comp[0].Company_ID;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            
         }
         public Payment Get_ID(int id)
         {
-            try
-            {
+            
+            
                 var record = _context.Payments.Find(id);
                 if (record == null)
                     throw new Exception($"The Record with Category Id {id} is Missing");
                 return record;
 
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
         }
 
         public Payment Update(int id,Order_Details entity)
         {
-            try
-            {
+          
+          
                 var record = _context.Payments.Find(id);
                 if (record == null)
                     throw new Exception($"The Record with Category Id {id} is Missing");
@@ -75,27 +62,17 @@ namespace Project_ON_MVC.Services
 
                 _context.SaveChanges();
                 return record;
-            }
-            catch (Exception ex)
-            {
-
-                throw ex;
-            }
         }
         public void Delete(int id)
         {
-            try
-            {
+            
+            
                 var record = _context.Companies.Find(id);
                 if (record == null)
                     throw new Exception($"The Record with Category Id {id} is Missing");
                 _context.Companies.Remove(record);
                 _context.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            
         }
 
         public void Delete_UserID(int id)

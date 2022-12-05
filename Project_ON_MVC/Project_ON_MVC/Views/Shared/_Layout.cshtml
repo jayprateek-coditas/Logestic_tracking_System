@@ -28,37 +28,37 @@
                         @*<li>@Html.ActionLink("About", "About", "Home")</li>*@
 
                         @*<li>@Html.ActionLink("User SignUp", "SignUp", "User")</li>*@
-                        <li>@Html.ActionLink("Logout", "LogOut", "User")</li>
+                        <li>@Html.ActionLink("LOGOUT", "LogOut", "User")</li>
                         if ((int)Session["Role"] == 12)
                         {
                             //    <li>@Html.ActionLink("PlaceOrder", "PlaceOrder", "Order")</li>
-                            <li>@Html.ActionLink("ShowPlacedOrder", "ShowPlacedOrder", "Orders")</li>
-                            <li>@Html.ActionLink("Search", "Search", "Company")</li>
-                            <li>@Html.ActionLink("PendingOrders", "ShowUnPaidOrder", "Orders")</li>
-                            <li>@Html.ActionLink("Place Order", "PlaceOrder", "Orders")</li>
+                            <li>@Html.ActionLink("PLACED ORDERS", "ShowPlacedOrder", "Orders")</li>
+                            <li>@Html.ActionLink("SEARCH", "Search", "Company")</li>
+                            <li>@Html.ActionLink("PENDING ORDERS", "ShowUnPaidOrder", "Orders")</li>
+                            <li>@Html.ActionLink("NEW ORDER", "PlaceOrder", "Orders")</li>
                         }
                         else if ((int)Session["Role"] == 13)
                         {
-                            <li>@Html.ActionLink("AllOrders", "DisplayCompany_Orders", "Company")</li>
-                            <li>@Html.ActionLink("Search", "Search", "Company")</li>
-                            <li>@Html.ActionLink("Add Route ", "Add_Route", "Shipment")</li>
-                            <li>@Html.ActionLink("Pending Orders", "TrackingStatusUpdate", "Tracking")</li>
-                            <li>@Html.ActionLink("Routes", "ShowAllRoutes","Company")</li>
+                            <li>@Html.ActionLink("ORDERS", "DisplayCompany_Orders", "Company")</li>
+                            <li>@Html.ActionLink("SEARCH", "Search", "Company")</li>
+                            <li>@Html.ActionLink("NEW ROUTE ", "Add_Route", "Shipment")</li>
+                            <li>@Html.ActionLink("PENDING ORDERS", "TrackingStatusUpdate", "Tracking")</li>
+                            <li>@Html.ActionLink("ROUTES", "ShowAllRoutes","Company")</li>
                         }
                         else
                         {
 
-                            <li>@Html.ActionLink("Register Comp", "Request_List", "Admin")</li>
-                            <li>@Html.ActionLink("Search", "Search", "Company")</li>
-                            <li>@Html.ActionLink("Users", "Users", "Admin")</li>
-                            <li>@Html.ActionLink("Orders", "ShowOrders", "Admin")</li>
-                            <li>@Html.ActionLink("Companies", "Companies", "Admin")</li>
+                            <li>@Html.ActionLink("APPROVE", "Request_List", "Admin")</li>
+                            <li>@Html.ActionLink("SEARCH", "Search", "Company")</li>
+                            <li>@Html.ActionLink("USERS", "Users", "Admin")</li>
+                            <li>@Html.ActionLink("ORDERS", "ShowOrders", "Admin")</li>
+                            <li>@Html.ActionLink("COMPANY", "Companies", "Admin")</li>
                         }
                     }
                     else
                     {
-                        <li>@Html.ActionLink("Login", "Login", "User")</li>
-                        <li>@Html.ActionLink("Track Order", "Search", "Company")</li>
+                        <li>@Html.ActionLink("LOGIN", "Login", "User")</li>
+                        <li>@Html.ActionLink("TRACK ORDER", "Search", "Company")</li>
                     }
                 </ul> 
             </div>

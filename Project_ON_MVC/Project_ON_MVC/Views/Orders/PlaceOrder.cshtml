@@ -1,103 +1,115 @@
 ﻿@model Project_ON_MVC.Models.Order_Details
 
-
+@{
+    ViewBag.Title = "PlaceOrder";
+}
 
 <style>
-    span{
-        font-size:medium;
-        font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-     }
+    span {
+        font-size: medium;
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    }
 </style>
 <body class="place">
 
 
-       <div class="outer-container">
-           
-           <div class="child">
-               @using (Html.BeginForm("PlaceOrder", "Orders", FormMethod.Post))
-               {
-                   @Html.AntiForgeryToken()
+    <div class="outer-container">
+
+        <div class="child">
+            @using (Html.BeginForm("PlaceOrder", "Orders", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                if (ViewBag.PlaceOrderError != null)
+                {
+                    <div style="border: 1px solid red">
+                        @ViewBag.PlaceOrderError
+                    </div>
+                }
+
+                <h2 style="margin-left:30px; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ;color:rgb(87, 148, 222)"><b>NEW ORDER</b></h2>
+                <hr />
 
 
-                   <h2 style="margin-left:30px; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ;color:rgb(87, 148, 222)"><b>NEW ORDER</b></h2>
-                   <hr />
-                   @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="inner-container">
+                    <div class="inner-child">
 
-           <div class="inner-container">
-               <div class="inner-child">
-
-                   <span>Order Value </span>
-                   </div>
-               <div class="inner-child-1">
-                   @Html.EditorFor(model => model.Order_Valuation, new { htmlAttributes = new { @class = "form-control", @placeholder = "Order Value" , min = 1, max = 10000 ,@style="border-radius:5px"} })
-                   @Html.ValidationMessageFor(model => model.Order_Valuation, "", new { @class = "text-danger", })
-               </div>
+                        <span>Order Value </span>
+                    </div>
+                    <div class="inner-child-1">
+                        @Html.EditorFor(model => model.Order_Valuation, new { htmlAttributes = new { @class = "form-control", @placeholder = "Order Value", min = 1, max = 10000, @style = "border-radius:5px", @required = "required" } })
+                        @Html.ValidationMessageFor(model => model.Order_Valuation, "", new { @class = "text-danger", })
+                    </div>
 
 
-               <div class="inner-child">
-                   <span>Quantity </span>
-                   </div>
-               <div class="inner-child-1">
-                   @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control", @placeholder = "Quantity",min=1 ,max=50 } })
-                   @Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger" })
+                    <div class="inner-child">
+                        <span>Quantity </span>
+                    </div>
+                    <div class="inner-child-1">
+                        @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control", @placeholder = "Quantity", min = 1, max = 50, @data_val = "true", @required = "required" } })
+                        @Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger" })
 
-               </div>
-
-
-               <div class="inner-child">
-                   <span>Weight  </span>
-                   </div>
-               <div class="inner-child-1">
-                   @Html.EditorFor(model => model.OrderWeight, new { htmlAttributes = new { @class = "form-control", @placeholder = "Weight in  Kg", min = 1, max = 1000 } })
-                   @Html.ValidationMessageFor(model => model.OrderWeight, "", new { @class = "text-danger" })
-
-               </div>
-               <div class="inner-child">
-                   <span>Source </span>
-                   </div>
-               <div cllas="inner-child-1">
-                   @Html.DropDownListFor(model => model.Order_Source, new SelectList(ViewBag.source_1), " ------- select ------- ", new { @class = "chzn-select", @style = "width:160px; height:25px;font-size:15px;" })
-               </div>
+                    </div>
 
 
-               <div class="inner-child">
-                   @* @Html.LabelFor(model => model.Order_Destination, htmlAttributes: new { @class = "control-label col-md-2" })*@
-                   <span>Destination</span>
-                   </div>
+                    <div class="inner-child">
+                        <span>Weight  </span>
+                    </div>
+                    <div class="inner-child-1">
+                        @Html.EditorFor(model => model.OrderWeight, new { htmlAttributes = new { @class = "form-control", @placeholder = "Weight in  Kg", min = 1, max = 1000, @data_val = "true", @required = "required" } })
+                        @Html.ValidationMessageFor(model => model.OrderWeight, "", new { @class = "text-danger" })
 
-                   <div class="inner-child-1">
-                       @Html.DropDownListFor(model => model.Order_Destination, new SelectList(ViewBag.dest_1), " ---- select ---- ", new { @class = "chzn-select", @style = "width:160px; height:25px;font-size:15px;" })
-                   </div>
-               
+                    </div>
+                    <div class="inner-child">
+                        <span>Source </span>
+                    </div>
+                    <div cllas="inner-child-1">
+                        @Html.DropDownListFor(model => model.Order_Source, new SelectList(ViewBag.source_data), " ------- select ------- ", new { @class = "chzn-select", @style = "width:160px; height:25px;font-size:15px;", @data_val = "true", @required = "required" })
+                    </div>
 
-               <div class="inner-child">
-                       <span>Sender Address </span>
-                   </div>
-               <div class="inner-child-1">
-                       @Html.TextAreaFor(model => model.Source_Description, new { htmlAttributes = new { @class = "form-control ", rows = "6", cols = "100", @placeholder = "Sender Address" } })
-                       @Html.ValidationMessageFor(model => model.Source_Description, "", new { @class = "text-danger" })
-                   </div>
-               
-               
 
-                   <div class="inner-child">
-                       <span>Receiver Address </span>
-                       </div>
-               <div class="inner-child-1">
-                       @Html.TextAreaFor(model => model.Dest_Description, new { htmlAttributes = new { @class = "form-control", rows = 6, cols = 100, @placeholder = "Receiver Address" } })
-                       @Html.ValidationMessageFor(model => model.Dest_Description, "", new { @class = "text-danger" })
-                   </div>
-               
-               <div class="inner-child inner-child-3">
-                   
-                       <input type="submit" value="Submit" class="btn btn-success" />
-                   </div>
-               
-           </div>
-                       }
-                   </div>
-               </div>
-       
+                    <div class="inner-child">
+                        @* @Html.LabelFor(model => model.Order_Destination, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                        <span>Destination</span>
+                    </div>
+
+                    <div class="inner-child-1">
+                        @Html.DropDownListFor(model => model.Order_Destination, new SelectList(ViewBag.dest_data), " ---- select ---- ", new { @class = "chzn-select", @style = "width:160px; height:25px;font-size:15px;", @data_val = "true", @required = "required" })
+                    </div>
+
+
+                    <div class="inner-child">
+                        <span>Sender Address </span>
+                    </div>
+                    <div class="inner-child-1">
+                        @Html.TextAreaFor(model => model.Source_Description, new { htmlAttributes = new { @class = "form-control ", @placeholder = "Sender Address", @data_val = "true", @required = "required", rows = "6", cols = "100", } })
+                        <br />  @Html.ValidationMessageFor(model => model.Source_Description, "", new { @class = "text-danger" })
+                    </div>
+
+
+
+                    <div class="inner-child">
+                        <span>Receiver Address </span>
+                    </div>
+                    <div class="inner-child-1">
+                        @Html.TextAreaFor(model => model.Dest_Description, new { htmlAttributes = new { @class = "form-control", @placeholder = "Receiver Address", @data_val = "true", @required = "required", @rows = "6", @cols = "100", } })
+                        <br />  @Html.ValidationMessageFor(model => model.Dest_Description, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="inner-child inner-child-3">
+
+                        <input type="submit" value="Submit" class="btn btn-success" />
+                    </div>
+
+                </div>
+            }
+        </div>
+    </div>
+
 </body>
 
 
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
