@@ -1,12 +1,15 @@
 ﻿@model IEnumerable<Project_ON_MVC.Models.User>
 
+@{
+    ViewData["Title"] = "Users";
+}
 
 <style>
-    th{
-        padding:10px;
-        font-size:medium;
-         background-color:darksalmon;
-         text-align:center;
+    th {
+        padding: 10px;
+        font-size: medium;
+        background-color: darksalmon;
+        text-align: center;
     }
 </style>
 
@@ -58,3 +61,8 @@
         </table>
     </div>
 </body>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

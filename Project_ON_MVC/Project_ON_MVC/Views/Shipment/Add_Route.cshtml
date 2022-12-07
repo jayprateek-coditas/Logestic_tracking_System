@@ -20,10 +20,10 @@
             <div>
                 @Html.AntiForgeryToken()
                 @Html.ValidationSummary(true)
-                @if (@ViewBag.msg != null)
+                @if (ViewBag.RouteError != null)
                 {
-                    <div style="border: 1px solid red">
-                        @ViewBag.msg
+                    <div style="border: 1px solid red;background-color:ghostwhite;text-align:center;margin-top:10px;">
+                        <h1>  @ViewBag.RouteError</h1>
                     </div>
                 }
                 <div style="margin-top:100px;background-color:gainsboro;padding-top:20px;padding-bottom:20px;border-block-color:aquamarine;border-radius:8px;">
@@ -32,9 +32,13 @@
 
                             <tr>
                                 <td style="width:250px"><div class="div_1"><input type="text" class="login_input_1" id="Source" placeholder="Source" required="required" name="Source"></div></td>
+                                @Html.ValidationMessageFor(model => model.Source, "", new { @class = "text-danger" })
                                 <td style="width:250px"><div class="div_1"><input type="text" class="login_input_1" id="Destination" placeholder="Destination" required="required" name="Destination"></div></td>
+                                @Html.ValidationMessageFor(model => model.Destination, "", new { @class = "text-danger" })
                                 <td style="width:250px"><div class="div_1"><input type="number" class="login_input_1" id="Distance" placeholder="Distance" required="required" name="Distance" min="1" max="5000"></div></td>
-                                <td style="width:250px"><div class="div_1"><input type="number" class="login_input_1" id="BasePrice" placeholder="Base Price" required="required" name="Base_Price"min="1" max="10" ></div></td>
+                                @Html.ValidationMessageFor(model => model.Distance, "", new { @class = "text-danger" })
+                                <td style="width:250px"><div class="div_1"><input type="number" class="login_input_1" id="BasePrice" placeholder="Base Price" required="required" name="Base_Price"></div></td>
+                                @Html.ValidationMessageFor(model => model.Base_Price, "", new { @class = "text-danger" })
                             </tr>
                             <tr>
                                 <td colspan="4" style="text-align:center"></td>
@@ -54,30 +58,35 @@
     }
 
 </body>
-    <script>
+<script>
 
-        function addRow() {
-            var table = document.getElementById("table_1");
-            var rws = table.rows;
-            var cols = table.rows[0].cells.length;
-            var row = table.insertRow(rws.length);
-            var cell = row.insertCell(0);
-            cell.innerHTML = '<div class="div_1"><input type="text" class="login_input_1" id="Source" placeholder="Source" required="required" name="Source"></div>';
-            var cell1 = row.insertCell(1);
-            cell1.innerHTML = '<div class="div_1"><input type="text" class="login_input_1" id="Destination" placeholder="Destination" required="required" name="Destination">';
-            var cell2 = row.insertCell(2);
-            cell2.innerHTML = '<div class="div_1"><input type="text" class="login_input_1" id="Distance" placeholder="Distance" required="required" name="Distance" min="1" max="5000"></div>';
-            var cell3 = row.insertCell(3);
-            cell3.innerHTML = '<div><input type="text" class="login_input_1" id="BasePrice" placeholder="Base Price" required="required" name="Base_Price"></div>';
-        }
-        function deleteRow() {
-            var table = document.getElementById("table_1");
-            var rws = table.rows;
-            if (rws.length > 1) { document.getElementById("table_1").deleteRow(rws); }
-        }
+    function addRow() {
+        var table = document.getElementById("table_1");
+        var rws = table.rows;
+        var cols = table.rows[0].cells.length;
+        var row = table.insertRow(rws.length);
+        var cell = row.insertCell(0);
+        cell.innerHTML = '<div class="div_1"><input type="text" class="login_input_1" id="Source" placeholder="Source" required="required" name="Source"></div>';
+        var cell1 = row.insertCell(1);
+        cell1.innerHTML = '<div class="div_1"><input type="text" class="login_input_1" id="Destination" placeholder="Destination" required="required" name="Destination">';
+        var cell2 = row.insertCell(2);
+        cell2.innerHTML = '<div class="div_1"><input type="text" class="login_input_1" id="Distance" placeholder="Distance" required="required" name="Distance" min="1" max="5000"></div>';
+        var cell3 = row.insertCell(3);
+        cell3.innerHTML = '<div><input type="text" class="login_input_1" id="BasePrice" placeholder="Base Price" required="required" name="Base_Price"></div>';
+    }
+    function deleteRow() {
+        var table = document.getElementById("table_1");
+        var rws = table.rows;
+        if (rws.length > 1) { document.getElementById("table_1").deleteRow(rws); }
+    }
 
-        function storeData() {
+    function storeData() {
 
-        }
+    }
 
-    </script>
+</script>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

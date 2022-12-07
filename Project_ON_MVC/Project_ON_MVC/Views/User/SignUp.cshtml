@@ -3,90 +3,90 @@
 @{
     ViewBag.Title = "SignUp";
 }
+<body class="login-body">
 
 
+    @using (Html.BeginForm("SignUp", "User", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
 
-@using (Html.BeginForm("SignUp", "User", FormMethod.Post))
-{
-    @Html.AntiForgeryToken()
-
-    @*<div class="form-horizontal">
-            <h4>User</h4>
-            <hr />
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
-                </div>
-            </div>
+        @*<div class="form-horizontal">
+                <h4>User</h4>
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
 
-
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Register" class="btn btn-default" />
-                </div>
-            </div>
-        </div>*@
-    <div class="login-page">
-        <div class="form">
-            <div class="login">
-                <div class="login-header">
-
-                </div>
-            </div>
-            <div class="wrapper">
-                <form name="form" class="login-form" id="form" action="~/User/Login" method="post">
-
-                    @Html.AntiForgeryToken()
-                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                    
-                    @if (@ViewBag.RegisterError != null)
-                    {
-                        <div style="border: 2px solid red;">
-                            <b>@ViewBag.RegisterError</b>
-                        </div>
-                    }
-                    <h1><b>SIGN UP</b></h1>
-                    <div class="input-control">
-                        <input type="email" class="login__input" id="Email" placeholder="Email" required="required" name="Email">
-                       <br /> @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
-                       
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
                     </div>
-                    <div class="input-control">
-                        <input type="password" class="login__input" id="Password" placeholder="Password" required="required" name="Password">
-                        <br />
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
-                        <div class="error"></div>
                     </div>
-                    <button class="button_1 btn-primary" type="submit" onclick="ValidateEmail()">SIGN UP</button>
-                    <p class="message">
-                        <b> Already Have an Account? </b>
-                        <div>
-                            @Html.ActionLink("Login", "Login", "User")
-                            <span>&nbsp;</span>
+                </div>
+
+
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Register" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>*@
+        <div class="login-page">
+            <div class="form">
+                <div class="login">
+                    <div class="login-header">
+
+                    </div>
+                </div>
+                <div class="wrapper">
+                    <form name="form" class="login-form" id="form" action="~/User/Login" method="post">
+
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                        @if (@ViewBag.RegisterError != null)
+                        {
+                            <div style="border: 2px solid red;">
+                                <b>@ViewBag.RegisterError</b>
+                            </div>
+                        }
+                        <h1 style="color: #24a0ed"><b>SIGN UP</b></h1>
+                        <div class="input-control">
+                            <input type="email" class="login__input" id="Email" placeholder="Email" required="required" name="Email">
+                            <br /> @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
 
                         </div>
-                </form>
+                        <div class="input-control">
+                            <input type="password" class="login__input" id="Password" placeholder="Password" required="required" name="Password">
+                            <br />
+                            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                            <div class="error"></div>
+                        </div>
+                        <button class="button_1 btn-primary" type="submit" onclick="ValidateEmail()">SIGN UP</button>
+                        <p class="message">
+                            <b> Already Have an Account? </b>
+                            <div>
+                                @Html.ActionLink("Login", "Login", "User")
+                                <span>&nbsp;</span>
+
+                            </div>
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
 
 
-}
-
+    }
+</body>
 <div>
     @Html.ActionLink("Back to Login", "Login")
 </div>

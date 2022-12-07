@@ -11,7 +11,7 @@ namespace Project_ON_MVC.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
     public partial class Shipment
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,9 +21,16 @@ namespace Project_ON_MVC.Models
         }
     
         public int Route_ID { get; set; }
+        [Required]
+        [MinLength(3, ErrorMessage = "Min 3 character Required")]
         public string Source { get; set; }
+        [Required]
+        [MinLength(3, ErrorMessage = "Min 3 character Required")]
         public string Destination { get; set; }
+        [Required]
+        [Range(1.0, 10.99,ErrorMessage = "Min 1.0 character Required")]
         public double Base_Price { get; set; }
+        [Required]
         public double Distance { get; set; }
         public Nullable<int> Company_ID { get; set; }
     

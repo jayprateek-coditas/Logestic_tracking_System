@@ -1,5 +1,8 @@
 ﻿@model List<Project_ON_MVC.Models.Tracking>
 
+@{
+    ViewBag.Title = "ShowPlacedOrder";
+}
 
 
 
@@ -12,7 +15,7 @@
         background-color: peachpuff;
         color: dodgerblue;
     }
-</style> 
+</style>
 
 <body style="background-image: url('/Images/orderImage.jpg'); background-size: cover;">
 
@@ -51,7 +54,7 @@
                                 @Html.DisplayFor(modelItem => item.Order_Details.Source_Description)
                             </td>
                             <td style="width:220px">
-                                @Html.DisplayFor(modelItem => item.Order_Details.Order_Destination)
+                                @Html.DisplayFor(modelItem => item.Order_Details.Dest_Description)
                             </td>
                             <td style="width:160px">
                                 @Html.ActionLink("Track", "TrackingStatus", "Tracking", new { id = item.Tracking_Number }, new { @class = "btn btn-primary", @style = "width:180px;margin-left:30px;" })
@@ -70,3 +73,8 @@
     </div>
 
 </body>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

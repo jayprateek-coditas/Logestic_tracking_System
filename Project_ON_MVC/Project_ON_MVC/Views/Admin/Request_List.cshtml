@@ -3,6 +3,10 @@
 @model List<Register_Company>
 
 
+@{
+    ViewData["Title"] = "Request_List";
+}
+
 <body class="admin-div">
     <div style="margin:10px;background-color:gainsboro;">
         <h3 style="text-align:center;font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif, Arial, sans-serif;margin-top:10px;padding-top:8px;color:steelblue;"><b>VERIFY COMPANY</b></h3>
@@ -46,9 +50,9 @@
                             @Html.DisplayFor(modelItem => item.company.Address)
                         </td>
                         <td style="text-align:center ;color:white;text-decoration-line:none">
-                             @Html.ActionLink("Approve", "Approve", new { id = item.company.User_ids }, new { @class = "btn btn-success" }))
+                            @Html.ActionLink("Approve", "Approve", new { id = item.company.User_ids }, new { @class = "btn btn-success" }))
                             &nbsp;&nbsp;
-                             @Html.ActionLink("Delete", "Delete", new { id = item.user.Users_ID }, new { @class = "btn btn-danger" }))
+                            @Html.ActionLink("Delete", "Delete", new { id = item.user.Users_ID }, new { @class = "btn btn-danger" }))
                         </td>
                     </tr>
                 }
@@ -58,3 +62,8 @@
 
     </div>
 </body>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,5 +1,10 @@
 ﻿@model IEnumerable<Project_ON_MVC.Models.GET_ALL_COMPANY_Result>
 
+@{
+    ViewData["Title"] = "Companies";
+}
+
+
 <style>
     th {
         padding: 15px;
@@ -91,3 +96,7 @@
     </div>
 </body>
 
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

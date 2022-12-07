@@ -25,8 +25,8 @@ namespace Project_ON_MVC.Controllers
 
         public ActionResult Add_Route()
         {
-            Session["Action"] = "Add_Route";
-            Session["Controller"]="Orders";
+            //Session["Action"] = "Add_Route";
+            //Session["Controller"]="Orders";
             return View();
         }
         [HttpPost]
@@ -34,23 +34,24 @@ namespace Project_ON_MVC.Controllers
         {
             if (Session["user_store"] != null)
             {
-                var comp_id = companyContext.Comp_by_ID(Convert.ToInt32(Session["user_store"]));
-
-                var ship_data = (from shipmentData in shipmentContext.Get().ToList() where ship.Source.ToLower() == shipmentData.Source.ToLower() && ship.Destination.ToLower() == shipmentData.Destination.ToLower() && comp_id == shipmentData.Company_ID select shipmentData).ToList();
-
-                if (ship_data.Count() > 0)
+                if (ModelState.IsValid)
                 {
-                    TempData["error"] = "Already Having this Route !!";
-                    return View();
-                }
+                    var comp_id = companyContext.Comp_by_ID(Convert.ToInt32(Session["user_store"]));
 
-                else
-                {
-                    ship.Company_ID = comp_id;
-                    shipmentContext.add(ship);
-                }
+                    var ship_data = (from shipmentData in shipmentContext.Get().ToList() where ship.Source.ToLower().Trim() == shipmentData.Source.ToLower().Trim() && ship.Destination.ToLower().Trim() == shipmentData.Destination.ToLower().Trim() && comp_id == shipmentData.Company_ID select shipmentData).ToList();
 
-                return View(ship);
+                    if (ship_data.Count() > 0)
+                    {
+                        ViewBag.RouteError = "Already Having this Route !!";
+                        return View();
+                    }
+                    else
+                    {
+                        ship.Company_ID = comp_id;
+                        shipmentContext.add(ship);
+                    }
+                }
+                return View();
             }
             return RedirectToAction("Login", "User");
         }
@@ -61,7 +62,7 @@ namespace Project_ON_MVC.Controllers
             {
                 var order = (List<string>)TempData["order"];
                 var routes = (shipmentContext.Get()).Where(value => value.Source == order[0] && value.Destination == order[1]).ToList();
-
+                TempData.Keep("order");
                 if (routes.Count() > 0)
                 {
                     return View(routes);

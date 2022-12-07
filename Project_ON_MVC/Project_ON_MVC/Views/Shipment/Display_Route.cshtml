@@ -1,12 +1,20 @@
 ﻿@model IEnumerable<Project_ON_MVC.Models.Shipment>
 
+<style>
+    th {
+        padding: 10px;
+        font-size: medium;
+        background-color: darksalmon;
+        text-align: center;
+    }
+</style>
 
 <body class="admin-div">
 
     <div class="bg-image h-100" style="background-color: #8ebcdb; margin-top:5%">
         @if (ViewBag.route_msg != null)
         {
-            <div style="border: 1px solid red ;font-size:larger;">
+            <div style="border: 1px solid red ;font-size:larger; height:50px">
                 @ViewBag.route_msg
             </div>
 
@@ -16,29 +24,40 @@
         }
         else
         {
-            <h2>List Of Companies </h2>
-            <table class="table .thead-light">
+            <h2 style="text-align:center;"><b>List Of Companies </b></h2>
+            <table class="table table-bordered .thead-light" style="background-color:lightgray;text-align:center">
                 <tr>
                     <th>
-                        @Html.DisplayNameFor(model => model.Route_ID)
+                        <b>  ROUTE ID</b>
+
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.Source)
+                        <b>SOURCE</b>
+
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.Destination)
+                        <b>DESTINATION</b>
+
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.Base_Price)
+                        <b>BASE PRICE</b>
+
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.Distance)
+                        <b>DISTANCE</b>
+
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.Company.Company_Name)
+                        <b>COMPANY NAME</b>
+
+                    </th>
+                    <th>
+
+                    </th>
+                    <th>
+
                     </th>
 
-                    <th></th>
                 </tr>
 
                 @foreach (var item in Model)
@@ -60,13 +79,13 @@
                             @Html.DisplayFor(modelItem => item.Distance)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Company_ID)
+                            @Html.DisplayFor(modelItem => item.Company.Company_Name)
                         </td>
                         <td>
-                            @Html.ActionLink("DisplayCompany", "Show_Company", new { id = item.Company_ID })
+                            @Html.ActionLink("COMPANY DETAIL", "Show_Company", new { id = item.Company_ID })
                         </td>
                         <td>
-                            <button type="button" class="btn btn-success"> @Html.ActionLink("Select", "Confirm", new { id = item.Route_ID })</button>
+                            @Html.ActionLink("Select", "Confirm", new { id = item.Route_ID }, new { @class = "btn btn-success" })
                         </td>
                     </tr>
                 }
@@ -75,3 +94,9 @@
         }
     </div>
 </body>
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

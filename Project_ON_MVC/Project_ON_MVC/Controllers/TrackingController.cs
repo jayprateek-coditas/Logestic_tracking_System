@@ -26,6 +26,7 @@ namespace Project_ON_MVC.Controllers
         {
             Tracking tracking = new Tracking();
             var l1 = (List<int>)TempData["track_data"];
+            TempData.Keep("track_data");
             tracking.Order_ID = l1.ElementAt(0);
             tracking.Company_ID = l1.ElementAt(1);
             tracking.Order_Status = "Order in Process";
@@ -35,16 +36,19 @@ namespace Project_ON_MVC.Controllers
 
         public ActionResult TrackingStatusUpdate()
         {
-            var id = (from user in userContext.Get() join company in companyContext.Get() on user.Users_ID equals company.User_ids where user.Users_ID == (int)Session["user_store"] select company).ToList();
-            var tracking = trackingContext.Get().Where(company_id => company_id.Company_ID == id[0].Company_ID && !(company_id.Order_Status).Contains("Success"));
-            if (tracking.Count() == 0)
+            if (Session["user_store"]!=null)
             {
-                ViewBag.CompanyOrdermsg = "Sorry You Are not Having any Pending Orders ";
-                return View();
-            }
-            
-            return View(tracking);
+                var id = (from user in userContext.Get() join company in companyContext.Get() on user.Users_ID equals company.User_ids where user.Users_ID == (int)Session["user_store"] select company).ToList();
+                var tracking = trackingContext.Get().Where(company_id => company_id.Company_ID == id[0].Company_ID && (company_id.Order_Status).Contains("Success") == false).ToList();
+                if (tracking.Count() == 0)
+                {
+                    ViewBag.CompanyOrdermsg = "Great !! NO Pending Orders ";
+                    return View();
+                }
 
+                return View(tracking);
+            }
+            return RedirectToAction("Login","User");
         }
 
         public ActionResult Tracking_Update(int id)
@@ -60,6 +64,7 @@ namespace Project_ON_MVC.Controllers
         {
 
             trackingContext.Update_Status((int)TempData["track_value"],track.Order_Status);
+            TempData.Keep("track_value");
             return RedirectToAction("TrackingStatusUpdate");
         }
 
@@ -68,10 +73,7 @@ namespace Project_ON_MVC.Controllers
 
         {
             var track = trackingContext.Get_by_TrackID((int)id);
-            
-           
             return View(track);
         }
-
     }
 }

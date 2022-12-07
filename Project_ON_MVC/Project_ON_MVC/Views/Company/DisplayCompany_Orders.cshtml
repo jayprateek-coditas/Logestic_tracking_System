@@ -51,11 +51,16 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.Order_Status)
                         </td>
-                        
+
                     </tr>
                 }
             </tbody>
         </table>
     </div>
-     <div style="height:50px;"></div>
+    <div style="height:50px;"></div>
 </body>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -70,64 +70,69 @@
 
 
 
-<body style="background-image: url('/Images/place order.jpg'); background-size: cover;">
+    <body style="background-image: url('/Images/place order.jpg'); background-size: cover;">
 
-    <div class="login-page">
-        <div class="form">
-            <div class="login">
-                <div class="login-header">
-
-                </div>
-            </div>
-            <div class="wrapper">
-                @*  <form name="form" class="login-form" id="form" action="~/User/Login" method="post">*@
-
-                @Html.AntiForgeryToken()
-                @Html.ValidationSummary(true)
-                @if (@ViewBag.CompanyRegisterError != null)
-                {
-                    <div style="border: 1px solid red">
-                     <b>@ViewBag.CompanyRegisterError</b>
-                    </div>
-                }
-                <h1><b>Company Registration</b></h1>
-                <div class="input-control">
-                    @Html.EditorFor(model => model.user.Email, new { htmlAttributes = new { @class = "login__input", @placeholder = "Email" ,@type="email", @data_val = "true", @required = "required" } })
-                    @*<input type="email" class="login__input" id="Email" placeholder="Email" required="required" name="Email">*@
-                    <div class="error"></div>
-                </div>
-                <div class="input-control">
-                    @Html.EditorFor(model => model.user.Password, new { htmlAttributes = new { @class = "login__input", type = "password", @placeholder = "Password", @min = "6", @max = "16", @data_val = "true", @required = "required" } })
-                    @*  <input type="password" class="login__input" id="Password" placeholder="Password" required="required" name="Password">*@
-                    <div class="error"></div>
-                </div>
-                <div class="input-control">
-                    @Html.EditorFor(model => model.company.Company_Name, new { htmlAttributes = new { @class = "login__input", @placeholder = "Company Name", @data_val = "true", @required = "required" } })
-                    <div class="error"></div>
-                </div>
-                <div class="input-control">
-                    @Html.EditorFor(model => model.company.Address, new { htmlAttributes = new { @class = "login__input", @placeholder = "Address", @data_val = "true", @required = "required" } })
-
-                    <div class="error"></div>
-                </div>
-                <div class="input-control">
-                    @Html.EditorFor(model => model.company.Contact_Number, new { htmlAttributes = new { @class = "login__input", @placeholder = "Contact Number ",@type="number",@min="1111111111",@max="9999999999", @data_val = "true", @required = "required" } })
-
-                    <div class="error"></div>
-                </div>
-
-                <button class="button_1 btn-primary" type="submit">SIGN UP</button>
-                <p class="message">
-                    <b> Already Have an Account? </b>
-                    <div>
-                        @Html.ActionLink("Login", "Login", "User")
-                        <span>&nbsp;</span>
+        <div class="login-page">
+            <div class="form">
+                <div class="login">
+                    <div class="login-header">
 
                     </div>
-                    @* </form>*@
+                </div>
+                <div class="wrapper">
+                    @*  <form name="form" class="login-form" id="form" action="~/User/Login" method="post">*@
+
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true)
+                    @if (@ViewBag.CompanyRegisterError != null)
+                    {
+                        <div style="border: 1px solid red">
+                            <b>@ViewBag.CompanyRegisterError</b>
+                        </div>
+                    }
+                    <h1 style="color: #24a0ed; font-size: larger; margin-bottom: 5px;"><b>Company Registration</b></h1>
+                    <div class="input-control">
+                        @Html.EditorFor(model => model.user.Email, new { htmlAttributes = new { @class = "login__input", @placeholder = "Email", @type = "email", @data_val = "true", @required = "required" } })
+                        <br />  @Html.ValidationMessageFor(model => model.user.Email, "", new { @class = "text-danger" })
+                        @*<input type="email" class="login__input" id="Email" placeholder="Email" required="required" name="Email">*@
+                        <div class="error"></div>
+                    </div>
+                    <div class="input-control">
+                        @Html.EditorFor(model => model.user.Password, new { htmlAttributes = new { @class = "login__input", type = "password", @placeholder = "Password", @data_val = "true", @required = "required" } })
+                        <br /> @Html.ValidationMessageFor(model => model.user.Password, "", new { @class = "text-danger" })
+                        @*  <input type="password" class="login__input" id="Password" placeholder="Password" required="required" name="Password">*@
+                        <div class="error"></div>
+                    </div>
+                    <div class="input-control">
+                        @Html.EditorFor(model => model.company.Company_Name, new { htmlAttributes = new { @class = "login__input", @placeholder = "Company Name", @data_val = "true", @required = "required" } })
+                        <br />  @Html.ValidationMessageFor(model => model.company.Company_Name, "", new { @class = "text-danger" })
+                        <div class="error"></div>
+                    </div>
+                    <div class="input-control">
+                        @Html.EditorFor(model => model.company.Address, new { htmlAttributes = new { @class = "login__input", @placeholder = "Address", @type = "text", @data_val = "true", @required = "required" } })
+                        <br /> @Html.ValidationMessageFor(model => model.company.Address, "", new { @class = "text-danger" })
+                        @*@Html.TextAreaFor(model => model.company.Address, new { htmlAttributes = new { @class = "form-control ", @placeholder = "Sender Address", @data_val = "true", @required = "required", rows = "6", cols = "100", } })
+        <br />  @Html.ValidationMessageFor(model => model.company.Address, "", new { @class = "text-danger" })*@
+                        <div class="error"></div>
+                    </div>
+                    <div class="input-control">
+                        @Html.EditorFor(model => model.company.Contact_Number, new { htmlAttributes = new { @class = "login__input", @placeholder = "Contact Number ", @type = "number", @min = "1111111111", @max = "9999999999", @data_val = "true", @required = "required" } })
+                       <br /> @Html.ValidationMessageFor(model => model.company.Contact_Number, "", new { @class = "text-danger" })
+                        <div class="error"></div>
+                    </div>
+
+                    <button class="button_1 btn-primary" type="submit">SIGN UP</button>
+                    <p class="message">
+                        <b> Already Have an Account? </b>
+                        <div>
+                            @Html.ActionLink("Login", "Login", "User")
+                            <span>&nbsp;</span>
+
+                        </div>
+                        @* </form>*@
+                </div>
             </div>
         </div>
-    </div>
 
 
 
@@ -249,5 +254,9 @@
         </script>
     </body>-->
     <!-- This templates was made by Colorlib (https://colorlib.com) -->
+}
     }
-    }
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

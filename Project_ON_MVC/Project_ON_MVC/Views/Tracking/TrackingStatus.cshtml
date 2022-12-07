@@ -15,7 +15,7 @@
                 <article class="card" style="margin-left:10px">
                     <header class="card-header"> My Orders / Tracking </header>
                     <div class="card-body" style="margin-left:10px">
-                        
+
                         <article class="card">
                             <div class="card-body row" style="margin-left:10px">
                                 <div class="col"> <strong>Order Placed Time:</strong> @Html.DisplayFor(model => model.Order_Details.Order_Time)<br> </div>
@@ -80,7 +80,7 @@
                             <hr>
                         }
 
-
+                    </div>
                 </article>
             </div>
         </div>
@@ -89,3 +89,8 @@
     </div>
 
 </body>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

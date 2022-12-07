@@ -11,3 +11,4 @@ namespace Project_ON_MVC.Models
         public Company company { get; set; }
     }
 }
+

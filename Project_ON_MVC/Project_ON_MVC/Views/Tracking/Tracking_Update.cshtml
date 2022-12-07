@@ -2,15 +2,15 @@
 
 
 <style>
-  .container-12{
-       margin-left:35%;
-       margin-top:50px;
-       margin-right:20%;
-       width:420px;
-       background-color:ghostwhite;
-       font-family:Courier New, Courier, monospace;
-      padding:20px;
-  }
+    .container-12 {
+        margin-left: 35%;
+        margin-top: 50px;
+        margin-right: 20%;
+        width: 420px;
+        background-color: ghostwhite;
+        font-family: Courier New, Courier, monospace;
+        padding: 20px;
+    }
 </style>
 <body style="background-image: url('/Images/update.jpg'); background-size: cover;">
     @using (Html.BeginForm("Tracking_Update", "Tracking", FormMethod.Post))
@@ -38,3 +38,8 @@
     }
 
 </body>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

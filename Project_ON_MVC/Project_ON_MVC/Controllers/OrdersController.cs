@@ -68,7 +68,9 @@ namespace Project_ON_MVC.Controllers
                 if (TempData["ship"] != null)
                 {
                     Shipment shipment = (Shipment)TempData["ship"];
+                    TempData.Keep("ship");
                     Order_Details order = (Order_Details)TempData["order_data"];
+                    TempData.Keep("order_data");
                     double price = (double)(order.Quantity * (order.OrderWeight * 0.05) * order.Order_Valuation) * (0.20) + (shipment.Base_Price * shipment.Distance) * 0.5;
                     order.User_ids = Convert.ToInt32(Session["user_store"]);
                     order.Order_Time = DateTime.Now;
@@ -112,6 +114,7 @@ namespace Project_ON_MVC.Controllers
                 MY_ProjectEntities1 _context = new MY_ProjectEntities1();
                 //  var ord = _context.Order_Details.Find(order.Order_ID);
                 var pay_update = _context.Payments.Find((int)(TempData["payment_invoice"]));
+                TempData.Keep("payment_invoice");
                 pay_update.Pay_Status = true;
                 pay_update.Payment_time = DateTime.Now;
                 pay_update.Payment_Mode = "Credit Card";

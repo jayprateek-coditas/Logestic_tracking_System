@@ -1,14 +1,13 @@
 ﻿@model IEnumerable<Project_ON_MVC.Models.Shipment>
 
-
-
-
+@{
+    ViewData["Title"] = "ShowAllRoutes";
+}
 
 
 <style>
     .container_inner1 {
-        margin-left: 20%;
-        
+        margin-left: 17%;
     }
 </style>
 
@@ -17,7 +16,7 @@
     <div class="container_inner1" style="margin-right:15%;">
         @foreach (var item in Model)
         {
-            <div class="track style="margin-bottom:50px;margin-top:50px;">
+            <div class="track" style="margin-bottom:50px;margin-top:50px;">
 
                 <div class="step active"> <span class="icon"> <i class="fa fa-check"></i> </span> <span class="text"><b>@Html.DisplayFor(modelItem => item.Source)</b></span> </div>
                 <div class="step active"> <span class="icon"> <i class="fa fa-user"></i> </span> <span class="text"><b> @Html.DisplayFor(modelItem => item.Destination)</b></span> </div>
@@ -28,3 +27,8 @@
     </div>
 
 </body>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -25,7 +25,7 @@ namespace Project_ON_MVC.Models
         public Nullable<int> Order_Valuation { get; set; }
         
         public Nullable<int> Quantity { get; set; }
-        
+        [Range(0.10, 200)]
         public Nullable<double> OrderWeight { get; set; }
         public string Order_Source { get; set; }
         [Required]

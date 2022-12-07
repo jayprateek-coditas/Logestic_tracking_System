@@ -52,6 +52,9 @@ namespace Project_ON_MVC.Controllers
 
             if (ModelState.IsValid)
             {
+                var password = Security.Encrypt(register.user.Password);
+                register.user.Password = password;
+
                 userContext.add(register.user);
                 ModelState.Clear();
             }
@@ -60,11 +63,10 @@ namespace Project_ON_MVC.Controllers
             {
                 register.company.User_ids = get_user_id.ToList()[0];
                 //register.company.User = null;
-                if (ModelState.IsValid)
-                {
+
                     companyContext.add(register.company);
                     ModelState.Clear();
-                }
+                
                 return RedirectToAction("Login", "User");
             }
             else
@@ -72,12 +74,12 @@ namespace Project_ON_MVC.Controllers
                 ViewBag.CompanyRegisterError = "Email ID  already registered ";
                 return RedirectToAction("Register_", "Company");
             }
-
-            
         }
+
         public ActionResult DisplayCompany()
         {
             int id = (int)TempData["comp_store_id"];
+            TempData.Keep("comp_store_id");
             Company comp = companyContext.Get_ID(id);
             return View(comp);
         }

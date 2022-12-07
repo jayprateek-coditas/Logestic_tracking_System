@@ -11,7 +11,6 @@ namespace Project_ON_MVC.Controllers
     public class AdminController : Controller
     {
         // GET: Admin
-
         UserContext userContext;
         CompanyContext compContext;
         OrdersContext ordersContext;
@@ -23,9 +22,6 @@ namespace Project_ON_MVC.Controllers
             ordersContext = new OrdersContext();
             StoreProcedure_Context = new MY_ProjectEntities1();
         }
-
-
-
         public ActionResult Request_List()
         {
             List<User> users = userContext.Get().ToList();

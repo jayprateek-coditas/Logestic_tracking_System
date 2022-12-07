@@ -21,7 +21,6 @@ namespace Project_ON_MVC.Models
             this.Order_Details = new HashSet<Order_Details>();
         }
         public int Users_ID { get; set; }
-
         
         [Required(ErrorMessage = "Email is required.")]
         [RegularExpression(@"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}", ErrorMessage = "Check email address format!")]

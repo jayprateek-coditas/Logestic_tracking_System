@@ -9,6 +9,9 @@
         font-size: medium;
         font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     }
+    .textarea1{
+        width:200px;
+    }
 </style>
 <body class="place">
 
@@ -38,7 +41,7 @@
                         <span>Order Value </span>
                     </div>
                     <div class="inner-child-1">
-                        @Html.EditorFor(model => model.Order_Valuation, new { htmlAttributes = new { @class = "form-control", @placeholder = "Order Value", min = 1, max = 10000, @style = "border-radius:5px", @required = "required" } })
+                        @Html.EditorFor(model => model.Order_Valuation, new { htmlAttributes = new { @class = "form-control", @placeholder = "Ex 700Rs", min = 1, max = 10000, @style = "border-radius:5px", @required = "required" } })
                         @Html.ValidationMessageFor(model => model.Order_Valuation, "", new { @class = "text-danger", })
                     </div>
 
@@ -47,7 +50,7 @@
                         <span>Quantity </span>
                     </div>
                     <div class="inner-child-1">
-                        @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control", @placeholder = "Quantity", min = 1, max = 50, @data_val = "true", @required = "required" } })
+                        @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control", @placeholder = "Ex 2", min = 1, max = 50, @data_val = "true", @required = "required" } })
                         @Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger" })
 
                     </div>
@@ -57,7 +60,7 @@
                         <span>Weight  </span>
                     </div>
                     <div class="inner-child-1">
-                        @Html.EditorFor(model => model.OrderWeight, new { htmlAttributes = new { @class = "form-control", @placeholder = "Weight in  Kg", min = 1, max = 1000, @data_val = "true", @required = "required" } })
+                        @Html.EditorFor(model => model.OrderWeight, new { htmlAttributes = new { @class = "form-control", @placeholder = "1 Kg", @data_val = "true", @required = "required" } })
                         @Html.ValidationMessageFor(model => model.OrderWeight, "", new { @class = "text-danger" })
 
                     </div>
@@ -93,13 +96,13 @@
                         <span>Receiver Address </span>
                     </div>
                     <div class="inner-child-1">
-                        @Html.TextAreaFor(model => model.Dest_Description, new { htmlAttributes = new { @class = "form-control", @placeholder = "Receiver Address", @data_val = "true", @required = "required", @rows = "6", @cols = "100", } })
+                        @Html.TextAreaFor(model => model.Dest_Description, new { htmlAttributes = new { @class = "form-control textarea1", @placeholder = "Receiver Address", @data_val = "true", @required = "required", @rows = "6", @cols = "100", } })
                         <br />  @Html.ValidationMessageFor(model => model.Dest_Description, "", new { @class = "text-danger" })
                     </div>
 
                     <div class="inner-child inner-child-3">
 
-                        <input type="submit" value="Submit" class="btn btn-success" />
+                        <input type="submit" value="Submit" class="btn btn-primary" />
                     </div>
 
                 </div>

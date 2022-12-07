@@ -2,10 +2,10 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">   
-   
-    @Styles.Render("~/Content/css")                                            
-    @Scripts.Render("~/bundles/modernizr")                                                 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -16,34 +16,27 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-               
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-
-
                     @if (Session["email"] != null)
-
                     {
                         @*<li>@Html.ActionLink("About", "About", "Home")</li>*@
-
                         @*<li>@Html.ActionLink("User SignUp", "SignUp", "User")</li>*@
                         <li>@Html.ActionLink("LOGOUT", "LogOut", "User")</li>
                         if ((int)Session["Role"] == 12)
                         {
                             //    <li>@Html.ActionLink("PlaceOrder", "PlaceOrder", "Order")</li>
                             <li>@Html.ActionLink("PLACED ORDERS", "ShowPlacedOrder", "Orders")</li>
-                            <li>@Html.ActionLink("SEARCH", "Search", "Company")</li>
                             <li>@Html.ActionLink("PENDING ORDERS", "ShowUnPaidOrder", "Orders")</li>
                             <li>@Html.ActionLink("NEW ORDER", "PlaceOrder", "Orders")</li>
                         }
                         else if ((int)Session["Role"] == 13)
                         {
                             <li>@Html.ActionLink("ORDERS", "DisplayCompany_Orders", "Company")</li>
-                            <li>@Html.ActionLink("SEARCH", "Search", "Company")</li>
                             <li>@Html.ActionLink("NEW ROUTE ", "Add_Route", "Shipment")</li>
                             <li>@Html.ActionLink("PENDING ORDERS", "TrackingStatusUpdate", "Tracking")</li>
-                            <li>@Html.ActionLink("ROUTES", "ShowAllRoutes","Company")</li>
+                            <li>@Html.ActionLink("ROUTES", "ShowAllRoutes", "Company")</li>
                         }
                         else
                         {
@@ -60,14 +53,14 @@
                         <li>@Html.ActionLink("LOGIN", "Login", "User")</li>
                         <li>@Html.ActionLink("TRACK ORDER", "Search", "Company")</li>
                     }
-                </ul> 
+                </ul>
             </div>
         </div>
     </div>
     <div class="container body-content">
         @RenderBody()
         <hr />
-       
+
     </div>
 
     @Scripts.Render("~/bundles/jquery")
@@ -75,3 +68,8 @@
     @RenderSection("scripts", required: false)
 </body>
 </html>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

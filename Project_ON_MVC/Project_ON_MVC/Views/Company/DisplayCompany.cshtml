@@ -15,43 +15,48 @@
 </style>
 
 <body style="background-image: url('/Images/update.jpg'); background-size: cover;">
-        <div class="container-12">
-             <h2 ><b style="color:royalblue">COMPANY DETAIL </b></h2>
-            <div>
-                <hr />
-                <dl class="dl-horizontal">
-                    <dt>
-                        <b>COMPANY ID :</b>
-                    </dt>
+    <div class="container-12">
+        <h2><b style="color:royalblue;text-align:center;">COMPANY DETAIL </b></h2>
+        <div>
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    <b>COMPANY ID :</b>
+                </dt>
 
-                    <dd>
-                        @Html.DisplayFor(model => model.Company_ID)
-                    </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.Company_ID)
+                </dd>
 
-                    <dt>
-                        <b>COMPANY NAME :</b>
-                    </dt>
+                <dt>
+                    <b>COMPANY NAME :</b>
+                </dt>
 
-                    <dd>
-                        @Html.DisplayFor(model => model.Company_Name)
-                    </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.Company_Name)
+                </dd>
 
-                    <dt>
-                        <b>ADDRESS :</b>
-                        
-                    </dt>
-                    <dd>
-                        @Html.DisplayFor(model => model.Address)
-                    </dd>
-                    <dt>
-                        <b>CONTACT NUMBER :</b>
-                        
-                    </dt>
-                    <dd>
-                        @Html.DisplayFor(model => model.Contact_Number)
-                    </dd>
-                </dl>
-            </div>
+                <dt>
+                    <b>ADDRESS :</b>
 
-            </div>
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Address)
+                </dd>
+                <dt>
+                    <b>CONTACT NUMBER :</b>
+
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Contact_Number)
+                </dd>
+            </dl>
+        </div>
+
+    </div>
 </body>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -10,12 +10,10 @@ using Project_ON_MVC.Services;
 
 namespace Logestic_Tracking.Controllers
 {
-
     public class UserController : Controller
     {
         // GET: User
-        UserContext userContext;
-    
+        UserContext userContext;   
         public UserController()
         {
            userContext = new UserContext();
@@ -29,12 +27,13 @@ namespace Logestic_Tracking.Controllers
         {
             return View();
         }
-        [AllowAnonymous]
+        
         [HttpPost]
         public ActionResult Login(User user)
         {
-            var users = userContext.Get().Where(value => value.Email == user.Email && value.Password == user.Password).ToList();
-            FormsAuthentication.SetAuthCookie(user.Email, false);
+            string Password = Security.Encrypt(user.Password);
+            var users = userContext.Get().Where(value => value.Email == user.Email && value.Password == Password).ToList();
+           
             
             if (users.Count() ==0)
             {
@@ -55,22 +54,18 @@ namespace Logestic_Tracking.Controllers
             }
             else if (users[0].Role_ID==13)
                      {
-              //  Session["user_store"] = u[0].Users_ID;
-                //TempData["comp_store"] = u[0].Users_ID;
-                return RedirectToAction("Search", "Company");
+              
+                return RedirectToAction("TrackingStatusUpdate", "Tracking");
             }
-           // Session["user_store"] = u[0].Users_ID;
+           
              return RedirectToAction("PlaceOrder", "Orders");
         }
-        [AllowAnonymous]
+        
         public ActionResult SignUp()
         {
             return View();
-
-            
-           // ViewData["roles"] = my_role;
         }
-        [AllowAnonymous]
+        
         [HttpPost]
         public ActionResult SignUp(User user)
         {
@@ -84,7 +79,10 @@ namespace Logestic_Tracking.Controllers
             }
             if(ModelState.IsValid)
             {
+                string password = Security.Encrypt(user.Password);
+                user.Password = password;
                 userContext.add(user);
+                ModelState.Clear();
                 return RedirectToAction("Login", "User"); ;
             }
             return View();
@@ -94,8 +92,6 @@ namespace Logestic_Tracking.Controllers
             Session.Abandon();
             FormsAuthentication.SignOut();
             return RedirectToAction("Login", "User");
-        }
-
-            
+        }            
     }
 }

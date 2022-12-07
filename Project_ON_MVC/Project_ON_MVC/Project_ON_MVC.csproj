@@ -186,13 +186,13 @@
     <Compile Include="Models\User.cs">
       <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\UsersRoleProvider.cs" />
     <Compile Include="Services\PaymentContext.cs" />
     <Compile Include="Services\Register_Company.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\CompanyContext.cs" />
     <Compile Include="Services\IDbContext.cs" />
     <Compile Include="Services\OrdersContext.cs" />
+    <Compile Include="Services\Security.cs" />
     <Compile Include="Services\ShipmentContext.cs" />
     <Compile Include="Services\TrackingContext.cs" />
     <Compile Include="Services\UserContext.cs" />
@@ -208,6 +208,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Images\back.jpg" />
     <Content Include="Images\background1.jpg" />
+    <Content Include="Images\background_12.jpg" />
     <Content Include="Images\backIMage.jpg" />
     <Content Include="Images\comp.jpg" />
     <Content Include="Images\delivary_13.jpeg" />

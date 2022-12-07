@@ -11,7 +11,8 @@ namespace Project_ON_MVC.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Company
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -22,8 +23,13 @@ namespace Project_ON_MVC.Models
         }
     
         public int Company_ID { get; set; }
+        [Required(ErrorMessage = "Company Name is required.")]
+        [MinLength(8, ErrorMessage = "Min 8 Char is Required ")]
         public string Company_Name { get; set; }
+        [Required(ErrorMessage = "Address is required.")]
+        [MinLength(12,ErrorMessage ="Min 12 Char is Required ")]
         public string Address { get; set; }
+        [Required(ErrorMessage = "Contact Number is required.")]
         public string Contact_Number { get; set; }
         public Nullable<int> User_ids { get; set; }
     
